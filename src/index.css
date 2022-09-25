@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Style to the navIteam like Home, Meet etc */
+.navIteam{
+  @apply w-1/5 text-center;
+}
