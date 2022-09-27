@@ -1,13 +1,10 @@
-// import logo from './logo.svg';
-// import './App.css';
-
-import Nav from "./components/Nav";
+import Home from "./views/Home";
 
 
 function App() {
   return (
-    <main className="bg-primary-900 h-screen">
-      <Nav/>
+    <main className="bg-primary-900 min-h-auto font-ubuntu">
+      <Home/>
     </main>
   );
 }

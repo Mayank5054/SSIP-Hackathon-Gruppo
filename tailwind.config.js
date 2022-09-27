@@ -7,16 +7,28 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          900: '#440F0F',
-          800: '#952B2B'
+          900: '#440F0F', // background color
+          800: '#952B2B' // box shadow color
         },
-        secondary: '#EFECEC',
-        linkColor: '#FFC700',
-        good: '#9FEF83',
-        bad: '#E72C2C'
+        secondary: {
+          900: '#EFECEC', // for white background
+          800: '#E2C8C8', // for main text
+          700: '#F0B9B9' // for secondary text
+        },
+        linkColor: '#FFC700', // yello for link
+        good: '#9FEF83', // green
+        bad: '#E72C2C' // red
       },
       boxShadow: {
-        'mine': '0px 4px 140px 15px #952B2B'
+        'mine': '0px 4px 140px 15px #952B2B',
+        'table': 'inset 0 0px 50px 10px rgb(149 43 43 / 0.5)'
+      },
+      fontFamily: {
+        gruppo: ['"Gruppo"'],
+        ubuntu: ['"Ubuntu"'],
+      },
+      spacing: { // for width
+        '9/10': '90%',
       }
     },
   },
