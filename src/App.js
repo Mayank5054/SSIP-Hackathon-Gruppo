@@ -13,7 +13,8 @@
 import React from "react";
 import Home from "./views/Home";
 import { Routes, Route } from "react-router-dom";
-import Login_page from './views/Login_page';
+import LoginPage from './views/LoginPage';
+import RegisterPage from "./views/RegisterPage";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
       {/* <main className="bg-primary-900 min-h-auto font-ubuntu"> */}
         {/* <Nav/> */}
         <Routes>
-          <Route path="/login" element={<Login_page />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/home" element={<Home />} />
         </Routes>
       {/* </main> */}

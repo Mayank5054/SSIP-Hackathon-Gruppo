@@ -2,15 +2,17 @@ import React, { useRef, useState, useEffect } from "react"
 import MyLink from "./MyLink";
 
 
-const Login = () => {
+const Register = () => {
     const userRef = useRef();
 
     //errRef to show different error messages 
     const errRef = useRef();
 
     const [role, setRole] = useState('');
+    const [user, setUser] = useState('');
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
+    const [cPwd, setCPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
@@ -30,8 +32,11 @@ const Login = () => {
         //backend integration here
         //according to statuscode of backend res error msg will change
         //currently it will show success for any value of email and passward 
+        //check if both password is same or not in back-end
+        setUser('');
         setEmail('');
         setPwd('');
+        setCPwd('');
         setSuccess(true);
     }
 
@@ -48,7 +53,7 @@ const Login = () => {
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <form onSubmit={handleSubmit} className="flex flex-col gap-5 text-primary-900 font-medium items-center w-1/2 ">
 
-                        <select value={role} onChange={(e) => setRole(e.target.value)} className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900">
+                        <select value={role} required onChange={(e) => setRole(e.target.value)} className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine">
                             <option className="">Choose role</option>
                             <option>1</option>
                             <option>2</option>
@@ -56,6 +61,18 @@ const Login = () => {
                             <option>4</option>
                             <option>5</option>
                         </select>
+
+                        <input
+                            type="text"
+                            id="userName"
+                            placeholder="User Name"
+                            ref={userRef}
+                            autoComplete="off"
+                            onChange={(e) => setUser(e.target.value)}
+                            value={user}
+                            required 
+                            className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine"
+                        />
 
                         <input
                             type="email"
@@ -66,9 +83,8 @@ const Login = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
                             required 
-                            className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900"
+                            className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine"
                         />
-
 
                         <input
                             type="password"
@@ -77,15 +93,26 @@ const Login = () => {
                             onChange={(e) => setPwd(e.target.value)}
                             value={pwd}
                             required
-                            className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900"
+                            className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine"
                         />
-                        <button className="bg-linkColor z-40 rounded-md mt-6 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor">LOGIN</button>
+
+                        <input
+                            type="password"
+                            id="confrimPassword"
+                            placeholder="Confrim Password"
+                            onChange={(e) => setCPwd(e.target.value)}
+                            value={cPwd}
+                            required
+                            className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine"
+                        />
+
+                        <button className="bg-linkColor z-40 rounded-md mt-6 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine">REGISTER</button>
                     </form>
 
                     <div className="relative bottom-6 rounded-lg pt-10 pb-4 bg-primary-900 shadow-mine w-2/3 text-center text-white">
                         <p>
-                            DON'T HAVE AN ACCOUNT?<br />
-                            <MyLink text="Sing Up" />
+                            ALREADY HAVE AN ACCOUNT?<br />
+                            <MyLink text="Sing In" />
                         </p>
                     </div>
                 </section>
@@ -94,4 +121,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Register;

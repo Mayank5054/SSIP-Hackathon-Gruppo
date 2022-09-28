@@ -2,7 +2,7 @@ import React from "react"
 import Nav from "../components/Nav"
 import Login from "../components/Login"
 
-const Login_page = () => {
+const LoginPage = () => {
     return (
         <>
             <Nav showBg={false}/> 
@@ -11,4 +11,4 @@ const Login_page = () => {
     )
 }
 
-export default Login_page;
+export default LoginPage;
