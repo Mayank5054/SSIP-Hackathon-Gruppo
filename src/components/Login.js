@@ -8,7 +8,7 @@ const Login = () => {
     const errRef = useRef();
 
     const [role, setRole] = useState('');
-    const [user, setUser] = useState(''); //user is used for email
+    const [email, setEmail] = useState(''); 
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
@@ -21,11 +21,15 @@ const Login = () => {
     // to empty the error msg when user changes user name or password
     useEffect(() => {
         setErrMsg('');
-    }, [user,pwd]);
+    }, [email,pwd]);
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setUser('');
+
+        //backend integration here
+        //according to statuscode of backend res error msg will change
+        //currently it will show success for any value of email and passward 
+        setEmail('');
         setPwd('');
         setSuccess(true);
     }
@@ -54,20 +58,20 @@ const Login = () => {
                             <option>4</option>
                             <option>5</option>
                         </select>
-                        {/* <label htmlFor="username">E-Mail:</label> */}
+                        
                         <input
                             type="email"
-                            id="username"
+                            id="email"
                             placeholder="E-Mail"
                             ref={userRef}
                             autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
                             required
                             className="w-full rounded p-3"
                         />
 
-                        {/* <label htmlFor="password">Password:</label> */}
+                        
                         <input
                             type="password"
                             id="password"
