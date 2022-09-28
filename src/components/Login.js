@@ -35,7 +35,7 @@ const Login = () => {
     }
 
     return (
-        <div className="bg-[url('./../public/style01.png')] w-full h-full flex justify-center bg-no-repeat bg-center">
+        <div className="bg-[url('./../public/style01.png')] w-full h-full flex justify-center bg-no-repeat bg-center h-screen">
             {success ? (
                 <section>
                     <h1>Logged in!</h1>
@@ -48,7 +48,7 @@ const Login = () => {
             ) : (
                 <section className="inset-x-0 top-0 container w-1/2 flex justify-center items-center flex-col">
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-3 items-center w-1/2">
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-3 items-center w-1/2 ">
 
                         <select value={role} onChange={(e) => setRole(e.target.value)} className="w-full rounded p-3">
                             <option className="">Choose role</option>

@@ -1,31 +1,33 @@
-<<<<<<< Updated upstream
-import Home from "./views/Home";
+// <<<<<<< Updated upstream
+// import Home from "./views/Home";
 
 
-function App() {
-  return (
-    <main className="bg-primary-900 min-h-auto font-ubuntu">
-      <Home/>
-    </main>
-=======
+// function App() {
+//   return (
+//     <main className="bg-primary-900 min-h-auto font-ubuntu">
+//       <Home/>
+//     </main>
+
 // import logo from './logo.svg';
 // import './App.css';
 import React from "react";
-import Nav from "./components/Nav";
-import Login from "./components/Login";
+import Home from "./views/Home";
 import { Routes, Route } from "react-router-dom";
+import Login_page from './views/Login_page';
 
 function App() {
   return (
     <React.Fragment>
-      <main className="bg-primary-900 h-screen">
-        <Nav/>
+  
+      {/* <main className="bg-primary-900 min-h-auto font-ubuntu"> */}
+        {/* <Nav/> */}
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login_page />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
-      </main>
+      {/* </main> */}
     </React.Fragment>
->>>>>>> Stashed changes
+// >>>>>>> Stashed changes
   );
 }
 
