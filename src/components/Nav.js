@@ -4,7 +4,7 @@ import MyLink from './MyLink';
 
 const Nav = () => {
     return (
-        <nav className='fixed w-full top-0 bg-primary-900 z-10'>
+        <nav className='fixed w-full top-0 z-10'>
             <div className='flex justify-between items-center h-20'>
 
                 <Logo/>
