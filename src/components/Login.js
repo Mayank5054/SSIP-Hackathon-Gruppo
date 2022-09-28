@@ -48,7 +48,7 @@ const Login = () => {
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <form onSubmit={handleSubmit} className="flex flex-col gap-5 text-primary-900 font-medium items-center w-1/2 ">
 
-                        <select value={role} onChange={(e) => setRole(e.target.value)} className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900">
+                        <select value={role} onChange={(e) => setRole(e.target.value)} className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine">
                             <option className="">Choose role</option>
                             <option>1</option>
                             <option>2</option>
@@ -66,7 +66,7 @@ const Login = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
                             required 
-                            className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900"
+                            className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine"
                         />
 
 
@@ -77,12 +77,12 @@ const Login = () => {
                             onChange={(e) => setPwd(e.target.value)}
                             value={pwd}
                             required
-                            className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900"
+                            className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine"
                         />
-                        <button className="bg-linkColor z-40 rounded-md mt-6 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor">LOGIN</button>
+                        <button className="bg-linkColor z-40 rounded-md mt-6 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine">LOGIN</button>
                     </form>
 
-                    <div className="relative bottom-6 rounded-lg pt-10 pb-4 bg-primary-900 shadow-mine w-2/3 text-center text-white">
+                    <div className="relative bottom-6 rounded-lg pt-10 pb-4 bg-primary-900 shadow-mine w-2/3 text-center text-white shadow-mine">
                         <p>
                             DON'T HAVE AN ACCOUNT?<br />
                             <MyLink text="Sing Up" />
