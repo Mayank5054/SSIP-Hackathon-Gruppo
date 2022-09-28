@@ -2,9 +2,13 @@ import React from 'react'
 import Logo from './Logo';
 import MyLink from './MyLink';
 
-const Nav = () => {
+const Nav = ({showBg}) => {
+    let classes = 'fixed w-full top-0 z-10';
+    if(showBg){
+        classes += ' bg-primary-900';
+    }
     return (
-        <nav className='fixed w-full top-0 z-10'>
+        <nav className={classes}>
             <div className='flex justify-between items-center h-20'>
 
                 <Logo/>

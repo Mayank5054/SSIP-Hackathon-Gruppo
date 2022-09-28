@@ -5,7 +5,7 @@ import Login from "../components/Login"
 const Login_page = () => {
     return (
         <>
-            <Nav /> 
+            <Nav showBg={false}/> 
             <Login />
         </>
     )

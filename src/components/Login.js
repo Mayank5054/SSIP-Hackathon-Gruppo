@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from "react"
+import React, { useRef, useState, useEffect } from "react"
 
 
 const Login = () => {
@@ -8,11 +8,11 @@ const Login = () => {
     const errRef = useRef();
 
     const [role, setRole] = useState('');
-    const [email, setEmail] = useState(''); 
+    const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
-    
+
     useEffect(() => {
         userRef.current.focus();
     }, []);
@@ -21,8 +21,8 @@ const Login = () => {
     // to empty the error msg when user changes user name or password
     useEffect(() => {
         setErrMsg('');
-    }, [email,pwd]);
-    
+    }, [email, pwd]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -35,22 +35,22 @@ const Login = () => {
     }
 
     return (
-        <div className="bg-[url('./../public/style01.png')] w-full h-full flex justify-center bg-no-repeat bg-center h-screen">
+        <div className="bg-[url('./../public/style01.png')] bg-fixed w-full flex justify-center bg-no-repeat bg-center h-screen">
             {success ? (
                 <section>
                     <h1>Logged in!</h1>
                     <br />
                     <p>
-                    {/* Router Link of Home page*/}
-                        <a href="#">Go to Home</a>
+                        {/* Router Link of Home page*/}
+                        <a href="http://localhost:3000/home">Go to Home</a>
                     </p>
                 </section>
             ) : (
                 <section className="inset-x-0 top-0 container w-1/2 flex justify-center items-center flex-col">
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-3 items-center w-1/2 ">
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-5 text-primary-900 font-medium items-center w-1/2 ">
 
-                        <select value={role} onChange={(e) => setRole(e.target.value)} className="w-full rounded p-3">
+                        <select value={role} onChange={(e) => setRole(e.target.value)} className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900">
                             <option className="">Choose role</option>
                             <option>1</option>
                             <option>2</option>
@@ -58,7 +58,7 @@ const Login = () => {
                             <option>4</option>
                             <option>5</option>
                         </select>
-                        
+
                         <input
                             type="email"
                             id="email"
@@ -68,10 +68,10 @@ const Login = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
                             required
-                            className="w-full rounded p-3"
+                            className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900"
                         />
 
-                        
+
                         <input
                             type="password"
                             id="password"
@@ -79,22 +79,20 @@ const Login = () => {
                             onChange={(e) => setPwd(e.target.value)}
                             value={pwd}
                             required
-                            className="w-full rounded p-3"
+                            className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900"
                         />
-                        <button className="bg-amber-400 z-40 rounded mt-8 p-2 w-full text-4xl font-medium">LOGIN</button>
+                        <button className="bg-linkColor z-40 rounded-md mt-6 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor">LOGIN</button>
                     </form>
-            
-                    <div className="absolute bottom-40 rounded-lg pt-10 pb-4 bg-stone-800 w-1/3 text-center text-white">
-                            <p>
-                                DON'T HAVE AN ACCOUNT?<br />
-                                <span className="underline text-rose-200">
-                                    {/* Router link of register page */}
-                                    <a href="#">Sign Up</a>
-                                </span>
-                            </p>
+
+                    <div className="relative bottom-6 rounded-lg pt-10 pb-4 bg-primary-900 shadow-mine w-2/3 text-center text-white">
+                        <p>
+                            DON'T HAVE AN ACCOUNT?<br />
+                            <span className="underline text-rose-200">
+                                {/* Router link of register page */}
+                                <a href="http://localhost:3000/login">Sign Up</a>
+                            </span>
+                        </p>
                     </div>
-                    
-                    
                 </section>
             )}
         </div>
@@ -102,21 +100,3 @@ const Login = () => {
 }
 
 export default Login
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
