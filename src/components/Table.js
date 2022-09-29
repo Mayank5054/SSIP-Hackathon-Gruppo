@@ -1,6 +1,6 @@
 import React from 'react'
 import TableRowFourC from './TableRowFourC'
-import {importantToday} from '../data/importantToday'
+import importantToday from '../data/importantToday'
 
 const Table = (props) => {
   console.log("from table",props.showNumberOfData)
