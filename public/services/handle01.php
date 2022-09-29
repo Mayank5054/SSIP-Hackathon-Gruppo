@@ -1,8 +1,8 @@
 <?php
 header('Access-Control-Allow-Origin:*');
 header('Access-Control-Allow-Methods:GET,POST,OPTIONS,PUT,DELETE');
-header('Access-Control-Allow-Headers:Content-Disposition,Content-Type,Content-Length,Accept-Encoding');
-header('Content-Type:multipart/form-data');
+// header('Access-Control-Allow-Headers:Content-Disposition,Content-Type,Content-Length,Accept-Encoding');
+// header('Content-Type:multipart/form-data');
 
 
 $a=json_decode(file_get_contents("php://input"),true);
@@ -17,8 +17,12 @@ $password=$a["password"];
 // echo $password;
 $ab=new validation();
 $check_result=$ab->check($email,$password);
-echo $check_result;
-
+if($check_result){
+$check=$ab->existence($email,$password);
+}
+else{
+      echo "LOGIN_CREDENTIALS_INVALID";
+}
 class validation{
       function check($em,$pw){
         $em_answer=preg_match("/^([a-zA-Z]+[0-9]*[_.-]?[a-zA-Z0-9]{1,})@([a-z]+[-]?[a-z]+.[a-z]{2,})$/",$em,$match);
@@ -33,6 +37,23 @@ class validation{
         else{
             return false;
         }
+      }
+      function existence($em,$pw){
+             $db=new mysqli("localhost","SSIP","SSIP","ssip",3306);
+             if($db){
+                  echo "select * from user_data where name='" . $em . "' and password='" .$pw . "'";
+                 $co=$db->query("select * from user_data where name='" . $em . "' and password='" .$pw . "'");
+                 $fetch=$co->fetch_row();
+                 if($fetch==null){
+                  echo "USER_NOT_EXISTS";
+                 }
+                 else{
+                  echo "UNIQUE_ID";
+                 }
+             }
+             else{
+                  
+             }
       }
 }
 ?>

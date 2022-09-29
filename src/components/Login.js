@@ -40,9 +40,12 @@ const Login = (props) => {
                 email:email,
                 password:password
             }).then(
-                // e.data returns 1 if credentials is correct otherwise 0 ;
-                // write if (e.data==1) and proceed for next step;
+                
                 (e)=>{console.log("data posted succesfully");}
+                // access key word in e.data 
+                // if validation incorrect e.data returns string "LOGIN_CREDENTIALS_INVALID"
+                // if authentication incorrect e.data = "USER_NOT_EXISTS"
+                // if authentication approved e.data = "UNIQUE_ID"(Ex : #59522dhjgwgbcjheb)
             )
         },[])
         setEmail('');
