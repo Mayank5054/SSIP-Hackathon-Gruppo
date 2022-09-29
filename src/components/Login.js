@@ -40,7 +40,6 @@ const Login = (props) => {
                 email:email,
                 password:pwd
             }).then(
-                
                 (e)=>{console.log("data posted succesfully");}
                 // access key word in e.data 
                 // if validation incorrect e.data returns string "LOGIN_CREDENTIALS_INVALID"
