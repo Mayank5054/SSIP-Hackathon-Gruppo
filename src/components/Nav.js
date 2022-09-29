@@ -2,9 +2,9 @@ import React from 'react'
 import Logo from './Logo';
 import MyLink from './MyLink';
 
-const Nav = ({showBg,isLoggedIn}) => {
+const Nav = (props) => {
     let classes = 'fixed w-full top-0 z-10';
-    if(showBg){
+    if(props.showBg){
         classes += ' bg-primary-900';
     }
     return (
@@ -12,9 +12,9 @@ const Nav = ({showBg,isLoggedIn}) => {
             <div className='flex justify-between items-center h-20'>
 
                 <Logo/>
-                {isLoggedIn && <div className=' w-2/5 h-20 pl-4 rounded-bl-full bg-secondary-900 text-primary-900 text-sm font-medium underline decoration-2 shadow-mine flex justify-between items-center'>
-                    <div className='group navIteam'>
-                        <a href="http://localhost:3000/"><img className='mx-auto' src="https://img.icons8.com/material-outlined/44/440F0F/home--v2.png" alt="home" /></a>
+                {props.isLoggedIn && <div className=' w-2/5 h-20 pl-4 rounded-bl-full bg-secondary-900 text-primary-900 text-sm font-medium underline decoration-2 shadow-mine flex justify-between items-center'>
+                    <div className='group navIteam cursor-pointer' onClick={props.goToHome}>
+                        <img className='mx-auto' src="https://img.icons8.com/material-outlined/44/440F0F/home--v2.png" alt="home" />
                         <p className='hidden group-hover:block'>Home</p>
                     </div>
 
@@ -39,7 +39,7 @@ const Nav = ({showBg,isLoggedIn}) => {
                     </div>
                 </div>}
             </div>
-            {isLoggedIn && <p className='relative text-right pr-6'><MyLink className="l-0" text={"Wanna create a new meet?"} /></p>}
+            {props.isLoggedIn && <p className='relative text-right pr-6 my-3'><MyLink className="l-0" text={"Wanna create a new meet?"} /></p>}
         </nav>
     )
 }

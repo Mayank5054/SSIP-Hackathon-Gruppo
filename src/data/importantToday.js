@@ -1,4 +1,4 @@
-const importantToday = [
+export const importantToday = [
     {
         id: '1',
         subject: 'About Anual Function',
@@ -46,7 +46,8 @@ const importantToday = [
         subject: 'PM Kisan Yojana',
         time: '04:00 PM',
         join: 'Join Here'
-    },{
+    },
+    {
         id: '9',
         subject: 'About Anual Function',
         time: '05:00 PM',

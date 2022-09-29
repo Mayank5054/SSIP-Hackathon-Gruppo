@@ -21,7 +21,7 @@ function App() {
       <Routes>
         <Route path="/register" element={<RegisterPage goToLogin={navigateToLogin} goToHome={navigateToHome}/>} />
         <Route path="/login" element={<LoginPage goToRegister={navigateToRegister} goToHome={navigateToHome}/>} />
-        <Route path="/home" element={<Home/>}/>
+        <Route path="/home" element={<Home goToHome={navigateToHome}/>}/>
       </Routes>
     </>
   );
