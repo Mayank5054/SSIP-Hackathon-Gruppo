@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react"
+import axios from 'axios';
 import MyLink from "./MyLink";
 
 
@@ -30,6 +31,20 @@ const Login = (props) => {
         //backend integration here
         //according to statuscode of backend res error msg will change
         //currently it will show success for any value of email and passward 
+        useEffect((e)=>{
+            // handle01.php is run on localhost for our development after we post it on somewhere which can execute php
+            // react js compiler doesnt execute php that's the matter .
+            // so put handle01.php on c://xampp/htdocs
+            // php-practise is my local folder you can add your link .
+            axios.post("http://localhost/php_practise/handle01.php",{
+                email:email,
+                password:password
+            }).then(
+                // e.data returns 1 if credentials is correct otherwise 0 ;
+                // write if (e.data==1) and proceed for next step;
+                (e)=>{console.log("data posted succesfully");}
+            )
+        },[])
         setEmail('');
         setPwd('');
         setSuccess(true);
