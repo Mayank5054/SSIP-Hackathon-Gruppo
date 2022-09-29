@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react"
 import MyLink from "./MyLink";
 
 
-const Register = () => {
+const Register = (props) => {
     const userRef = useRef();
 
     //errRef to show different error messages 
@@ -46,7 +46,7 @@ const Register = () => {
                 <section className="flex justify-center flex-col">
                     <h1 className="text-white text-3xl font-medium">Logged in!</h1>
                     <br />
-                    <MyLink text="Go to Home" />
+                    <MyLink text="Go to Home" goTo={props.goToHome}/>
                 </section>
             ) : (
                 <section className="inset-x-0 top-0 container w-1/2 flex justify-center items-center flex-col">
@@ -112,7 +112,7 @@ const Register = () => {
                     <div className="relative bottom-6 rounded-lg pt-10 pb-4 bg-primary-900 shadow-mine w-2/3 text-center text-white">
                         <p>
                             ALREADY HAVE AN ACCOUNT?<br />
-                            <MyLink text="Sing In" />
+                            <MyLink text="Sing In" goTo={props.goToLogin}/>
                         </p>
                     </div>
                 </section>

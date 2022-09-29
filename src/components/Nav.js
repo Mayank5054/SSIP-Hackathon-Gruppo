@@ -2,7 +2,7 @@ import React from 'react'
 import Logo from './Logo';
 import MyLink from './MyLink';
 
-const Nav = ({showBg}) => {
+const Nav = ({showBg,isLoggedIn}) => {
     let classes = 'fixed w-full top-0 z-10';
     if(showBg){
         classes += ' bg-primary-900';
@@ -12,7 +12,7 @@ const Nav = ({showBg}) => {
             <div className='flex justify-between items-center h-20'>
 
                 <Logo/>
-                <div className=' w-2/5 h-20 pl-4 rounded-bl-full bg-secondary-900 text-primary-900 text-sm font-medium underline decoration-2 shadow-mine flex justify-between items-center'>
+                {isLoggedIn && <div className=' w-2/5 h-20 pl-4 rounded-bl-full bg-secondary-900 text-primary-900 text-sm font-medium underline decoration-2 shadow-mine flex justify-between items-center'>
                     <div className='group navIteam'>
                         <a href="http://localhost:3000/"><img className='mx-auto' src="https://img.icons8.com/material-outlined/44/440F0F/home--v2.png" alt="home" /></a>
                         <p className='hidden group-hover:block'>Home</p>
@@ -37,9 +37,9 @@ const Nav = ({showBg}) => {
                         <a href="http://localhost:3000/"><img className='mx-auto' src="https://img.icons8.com/ios-glyphs/44/440F0F/system-task--v1.png" alt='DashBoard' /></a>
                         <p className='hidden group-hover:block'>DashBoard</p>
                     </div>
-                </div>
+                </div>}
             </div>
-            <p className='relative text-right pr-6'><MyLink className="l-0" text={"Wanna create a new meet?"} /></p>
+            {isLoggedIn && <p className='relative text-right pr-6'><MyLink className="l-0" text={"Wanna create a new meet?"} /></p>}
         </nav>
     )
 }

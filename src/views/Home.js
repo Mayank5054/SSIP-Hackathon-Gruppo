@@ -7,7 +7,7 @@ import Table from '../components/Table.js'
 const Home = () => {
   return (
     <>
-      <Nav showBg={true} />
+      <Nav showBg={true} isLoggedIn={true}/>
       <section className='w-9/10 mx-auto relative my-40'>
         <Heading text="Important for today" />
         <Table />
