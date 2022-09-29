@@ -1,9 +1,9 @@
 import React from 'react'
 
-const MyLink = ({text}) => {
+const MyLink = ({text, goTo}) => {
   return (
     <>
-        <a href="http://localhost:3000/" className='text-linkColor underline'>{text}</a>
+        <p onClick={goTo} className='text-linkColor underline cursor-pointer'>{text}</p>
     </>
   )
 }

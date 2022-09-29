@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react"
 import MyLink from "./MyLink";
 
 
-const Login = () => {
+const Login = (props) => {
     const userRef = useRef();
 
     //errRef to show different error messages 
@@ -41,7 +41,7 @@ const Login = () => {
                 <section className="flex justify-center flex-col">
                     <h1 className="text-white text-3xl font-medium">Logged in!</h1>
                     <br />
-                    <MyLink text="Go to Home" />
+                    <MyLink text="Go to Home" goTo={props.goToHome}/>
                 </section>
             ) : (
                 <section className="inset-x-0 top-0 container w-1/2 flex justify-center items-center flex-col">
@@ -82,10 +82,10 @@ const Login = () => {
                         <button className="bg-linkColor z-40 rounded-md mt-6 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine">LOGIN</button>
                     </form>
 
-                    <div className="relative bottom-6 rounded-lg pt-10 pb-4 bg-primary-900 shadow-mine w-2/3 text-center text-white shadow-mine">
+                    <div className="relative bottom-6 rounded-lg pt-10 pb-4 bg-primary-900 shadow-mine w-2/3 text-center text-white">
                         <p>
                             DON'T HAVE AN ACCOUNT?<br />
-                            <MyLink text="Sing Up" />
+                            <MyLink text="Sing Up" goTo={props.goToRegister} />
                         </p>
                     </div>
                 </section>

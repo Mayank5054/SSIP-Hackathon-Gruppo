@@ -1,35 +1,29 @@
-// <<<<<<< Updated upstream
-// import Home from "./views/Home";
-
-
-// function App() {
-//   return (
-//     <main className="bg-primary-900 min-h-auto font-ubuntu">
-//       <Home/>
-//     </main>
-
-// import logo from './logo.svg';
-// import './App.css';
 import React from "react";
 import Home from "./views/Home";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import LoginPage from './views/LoginPage';
 import RegisterPage from "./views/RegisterPage";
 
+
 function App() {
+  const navigate = useNavigate();
+  const navigateToRegister = () => {
+    navigate('/register');
+  }
+  const navigateToLogin = () => {
+    navigate('/login');
+  }
+  const navigateToHome = () => {
+    navigate('/home');
+  }
   return (
-    <React.Fragment>
-  
-      {/* <main className="bg-primary-900 min-h-auto font-ubuntu"> */}
-        {/* <Nav/> */}
-        <Routes>
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/home" element={<Home />} />
-        </Routes>
-      {/* </main> */}
-    </React.Fragment>
-// >>>>>>> Stashed changes
+    <>
+      <Routes>
+        <Route path="/register" element={<RegisterPage goToLogin={navigateToLogin} goToHome={navigateToHome}/>} />
+        <Route path="/login" element={<LoginPage goToRegister={navigateToRegister} goToHome={navigateToHome}/>} />
+        <Route path="/home" element={<Home goToHome={navigateToHome}/>}/>
+      </Routes>
+    </>
   );
 }
 
