@@ -38,7 +38,7 @@ const Login = (props) => {
             // php-practise is my local folder you can add your link .
             axios.post("http://localhost/php_practise/handle01.php",{
                 email:email,
-                password:password
+                password:pwd
             }).then(
                 
                 (e)=>{console.log("data posted succesfully");}
