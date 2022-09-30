@@ -25,13 +25,12 @@ const Login = (props) => {
         setErrMsg('');
     }, [email, pwd]);
 
-    const handleSubmit = async (e) => {
+    const HandleSubmit = async (e) => {
         e.preventDefault();
-
         //backend integration here
         //according to statuscode of backend res error msg will change
         //currently it will show success for any value of email and passward 
-        useEffect((e)=>{
+        
             // handle01.php is run on localhost for our development after we post it on somewhere which can execute php
             // react js compiler doesnt execute php that's the matter .
             // so put handle01.php on c://xampp/htdocs
@@ -40,16 +39,16 @@ const Login = (props) => {
                 email:email,
                 password:pwd
             }).then(
-                (e)=>{console.log("data posted succesfully");}
+                (ed)=>{console.log("data posted succesfully");setSuccess(true);console.log(ed.data);}
                 // access key word in e.data 
                 // if validation incorrect e.data returns string "LOGIN_CREDENTIALS_INVALID"
                 // if authentication incorrect e.data = "USER_NOT_EXISTS"
                 // if authentication approved e.data = "UNIQUE_ID"(Ex : #59522dhjgwgbcjheb)
             )
-        },[])
+       
         setEmail('');
         setPwd('');
-        setSuccess(true);
+        
     }
 
     return (
@@ -63,7 +62,7 @@ const Login = (props) => {
             ) : (
                 <section className="inset-x-0 top-0 container w-1/2 flex justify-center items-center flex-col">
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-5 text-primary-900 font-medium items-center w-1/2 ">
+                    <form onSubmit={HandleSubmit} className="flex flex-col gap-5 text-primary-900 font-medium items-center w-1/2 ">
 
                         <select value={role} onChange={(e) => setRole(e.target.value)} className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine">
                             <option className="">Choose role</option>
