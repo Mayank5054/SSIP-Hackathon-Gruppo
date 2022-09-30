@@ -1,9 +1,12 @@
-import React, { useRef, useState, useEffect } from "react"
+import React, { useRef, useState, useEffect, useContext } from "react"
 import axios from 'axios';
 import MyLink from "./MyLink";
+import pathContext from "../context/path-context";
 
 
 const Login = (props) => {
+    const ctx = useContext(pathContext);
+
     const userRef = useRef();
 
     //errRef to show different error messages 
@@ -57,7 +60,7 @@ const Login = (props) => {
                 <section className="flex justify-center flex-col">
                     <h1 className="text-white text-3xl font-medium">Logged in!</h1>
                     <br />
-                    <MyLink text="Go to Home" goTo={props.goToHome}/>
+                    <MyLink text="Go to Home" goTo={ctx.navigateToHome}/>
                 </section>
             ) : (
                 <section className="inset-x-0 top-0 container w-1/2 flex justify-center items-center flex-col">
@@ -101,7 +104,7 @@ const Login = (props) => {
                     <div className="relative bottom-6 rounded-lg pt-10 pb-4 bg-primary-900 shadow-mine w-2/3 text-center text-white">
                         <p>
                             DON'T HAVE AN ACCOUNT?<br />
-                            <MyLink text="Sing Up" goTo={props.goToRegister} />
+                            <MyLink text="Sing Up" goTo={ctx.navigateToRegister} />
                         </p>
                     </div>
                 </section>

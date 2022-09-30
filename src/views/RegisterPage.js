@@ -6,7 +6,7 @@ const RegisterPage = (props) => {
     return (
         <>
             <Nav showBg={false} isLoggedIn={false}/> 
-            <Register goToLogin={props.goToLogin} goToHome={props.goToHome}/>
+            <Register/>
         </>
     )
 } 

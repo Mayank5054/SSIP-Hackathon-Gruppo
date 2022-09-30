@@ -6,7 +6,7 @@ const LoginPage = (props) => {
     return (
         <>
             <Nav showBg={false} isLoggedIn={false}/> 
-            <Login goToRegister={props.goToRegister} goToHome={props.goToHome}/>
+            <Login/>
         </>
     )
 }
