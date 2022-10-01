@@ -40,12 +40,11 @@ const Login = (props) => {
                 password:pwd
             }).then(
                 (ed)=>{console.log("data posted succesfully");setSuccess(true);console.log(ed.data);}
-                // access key word in e.data 
+                // access key word in ed.data 
                 // if validation incorrect e.data returns string "LOGIN_CREDENTIALS_INVALID"
                 // if authentication incorrect e.data = "USER_NOT_EXISTS"
                 // if authentication approved e.data = "UNIQUE_ID"(Ex : #59522dhjgwgbcjheb)
             )
-       
         setEmail('');
         setPwd('');
         

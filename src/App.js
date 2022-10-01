@@ -8,7 +8,9 @@ import RegisterPage from "./views/RegisterPage";
 function App() {
   const navigate = useNavigate();
   const navigateToRegister = () => {
+    if(sessionStorage.getItem("IS_LOGGED_IN")=="TRUE"){
     navigate('/register');
+    }
   }
   const navigateToLogin = () => {
     navigate('/login');
