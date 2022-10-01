@@ -1,8 +1,10 @@
-import React from 'react'
+import React,{useContext} from 'react'
+import pathContext from '../context/path-context'
 
 const Logo = () => {
+  const ctx = useContext(pathContext)
   return (
-    <span className='font-gruppo px-10 text-white text-5xl hover:cursor-pointer'>Gruppo</span>
+    <span onClick={ctx.navigateToHome} className='font-gruppo px-10 text-white text-5xl hover:cursor-pointer'>Gruppo</span>
   )
 }
 
