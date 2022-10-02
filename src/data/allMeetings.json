@@ -1,72 +1,102 @@
-[
-    {
+{
+    "1": {
         "id": "1",
         "subject": "About Anual Function",
         "date": "30-09-2022",
         "time": "09:00 AM",
-        "join": "Join Here"
+        "join": "OFFLINE",
+        "venue": "Commisioner office , Rander",
+        "organizer": "Mayank Sheladia",
+        "summary": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda totam, eaque amet fugiat molestiae, accusantium voluptatibus dolore soluta recusandae necessitatibus iure temporibus culpa doloremque voluptatem id et rerum voluptas, commodi ad hic. Totam, dolores adipisci."
     },
-    {
+    "2": {
         "id": "2",
         "subject": "Police welfare",
         "date": "11-10-2022",
         "time": "10:00 PM",
-        "join": "OFFLINE"
+        "join": "Join Here",
+        "venue": "-",
+        "organizer": "Prit Manvar",
+        "summary": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis commodi voluptatem officia consequatur a ex error quam rem perspiciatis sequi eius, veniam odit laudantium consequuntur quidem rerum maxime, dolore blanditiis esse labore cupiditate repellendus obcaecati."
     },
-    {
+    "3": {
         "id": "3",
         "subject": "PM Arrival Arrangment",
         "date": "01-10-2022",
         "time": "11:00 AM",
-        "join": "OFFLINE"
+        "join": "OFFLINE",
+        "venue": "Muncipal Hall",
+        "organizer": "Sahil Mandani",
+        "summary": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis commodi voluptatem officia consequatur a ex error quam rem perspiciatis sequi eius, veniam odit laudantium consequuntur quidem rerum maxime, dolore blanditiis esse labore cupiditate repellendus obcaecati."
     },
-    {
+    "4": {
         "id": "4",
         "subject": "PM Kisan Yojana",
         "date": "02-10-2022",
         "time": "12:00 PM",
-        "join": "Join Here"
+        "join": "Join Here",
+        "venue": "-",
+        "organizer": "Dhara Solanki",
+        "summary": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis commodi voluptatem officia consequatur a ex error quam rem perspiciatis sequi eius, veniam odit laudantium consequuntur quidem rerum maxime, dolore blanditiis esse labore cupiditate repellendus obcaecati."
     },
-    {
+    "5": {
         "id": "5",
         "subject": "About Anual Function",
         "date": "03-10-2022",
         "time": "01:00 PM",
-        "join": "Join Here"
+        "join": "Join Here",
+        "venue": "-",
+        "organizer": "Drishty Ganatra",
+        "summary": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis commodi voluptatem officia consequatur a ex error quam rem perspiciatis sequi eius, veniam odit laudantium consequuntur quidem rerum maxime, dolore blanditiis esse labore cupiditate repellendus obcaecati."
     },
-    {
+    "6": {
         "id": "6",
         "subject": "Police welfare",
         "date": "04-10-2022",
         "time": "02:00 PM",
-        "join": "OFFLINE"
+        "join": "OFFLINE",
+        "venue": "Muncipal Hall",
+        "organizer": "Krupa Patel",
+        "summary": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis commodi voluptatem officia consequatur a ex error quam rem perspiciatis sequi eius, veniam odit laudantium consequuntur quidem rerum maxime, dolore blanditiis esse labore cupiditate repellendus obcaecati."
     },
-    {
+    "7": {
         "id": "7",
         "subject": "PM Arrival Arrangment",
         "date": "05-10-2022",
         "time": "03:00 PM",
-        "join": "OFFLINE"
+        "join": "OFFLINE",
+        "venue": "Muncipal Hall",
+        "organizer": "Sahil Mandani",
+        "summary": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis commodi voluptatem officia consequatur a ex error quam rem perspiciatis sequi eius, veniam odit laudantium consequuntur quidem rerum maxime, dolore blanditiis esse labore cupiditate repellendus obcaecati."
     },
-    {
+    "8": {
         "id": "8",
         "subject": "PM Kisan Yojana",
         "date": "06-10-2022",
         "time": "04:00 PM",
-        "join": "Join Here"
+        "join": "Join Here",
+        "venue": "-",
+        "organizer": "Hiral Patel",
+        "summary": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis commodi voluptatem officia consequatur a ex error quam rem perspiciatis sequi eius, veniam odit laudantium consequuntur quidem rerum maxime, dolore blanditiis esse labore cupiditate repellendus obcaecati."
     },
-    {
+    "9": {
         "id": "9",
         "subject": "About Anual Function",
         "date": "07-10-2022",
         "time": "05:00 PM",
-        "join": "Join Here"
+        "join": "-",
+        "venue": "Muncipal Hall",
+        "organizer": "Mayank Sheladia",
+        "summary": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis commodi voluptatem officia consequatur a ex error quam rem perspiciatis sequi eius, veniam odit laudantium consequuntur quidem rerum maxime, dolore blanditiis esse labore cupiditate repellendus obcaecati."
     },
-    {
+    "10": {
         "id": "10",
         "subject": "Police welfare",
         "date": "08-10-2022",
         "time": "6:00 PM",
-        "join": "OFFLINE"
+        "join": "OFFLINE",
+        "venue": "Muncipal Hall",
+        "organizer": "Prit Manvar",
+        "summary": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis commodi voluptatem officia consequatur a ex error quam rem perspiciatis sequi eius, veniam odit laudantium consequuntur quidem rerum maxime, dolore blanditiis esse labore cupiditate repellendus obcaecati."
     }
-]
+}

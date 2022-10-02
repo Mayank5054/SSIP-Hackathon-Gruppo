@@ -3,11 +3,9 @@
 @tailwind utilities;
 
 /* Gruppo and Ububtu fonts */
-@import url('https://fonts.googleapis.com/css2?family=Gruppo&family=Ubuntu:wght@300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Gruppo&family=Ubuntu:wght@300;400;500&display=swap");
 
 /* Style to the navIteam like Home, Meet etc */
-.navIteam{
-  @apply w-1/5 text-center;
+.navIteam {
+    @apply w-1/5 text-center;
 }
-
-
