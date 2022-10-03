@@ -10,15 +10,18 @@ import pathContext from "./context/path-context";
 function App() {
   const navigate = useNavigate();
   const navigateToRegister = () => {
-    if(sessionStorage.getItem("IS_LOGGED_IN")=="TRUE"){
+
     navigate('/register');
-    }
+
   }
   const navigateToLogin = () => {
     navigate('/login');
   }
   const navigateToHome = () => {
+ 
+    console.log("error");
     navigate('/home');
+   
   }
   const navigateToMeets = () => {
     navigate('/meets');
@@ -33,10 +36,10 @@ function App() {
       <Routes>
         <Route path="/register" element={<RegisterPage/>} />
         <Route path="/login" element={<LoginPage/>} />
-        <Route path="/home" element={<Home/>}/>
-        <Route path="/meets" element={<Meets/>}/>
+        <Route path="/home" element={localStorage.getItem("check_obj")==='true' && <Home/>}/>
+        <Route path="/meets" element={localStorage.getItem("check_obj")==='true' && <Meets/>}/>
       </Routes>
-    </pathContext.Provider>
+    </pathContext.Provider> 
   );
 }
 

@@ -10,7 +10,6 @@ const Register = (props) => {
 
     //errRef to show different error messages 
     const errRef = useRef();
-
     const [role, setRole] = useState('');
     const [user, setUser] = useState('');
     const [email, setEmail] = useState('');
