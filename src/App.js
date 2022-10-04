@@ -6,6 +6,7 @@ import RegisterPage from "./views/RegisterPage";
 import Meets from "./views/Meets";
 import pathContext from "./context/path-context";
 import MeetDetails from "./views/MeetDetails";
+import CalendarPage from "./views/calendarPage";
 
 function App() {
     const navigate = useNavigate();
@@ -22,8 +23,10 @@ function App() {
         navigate("/meets");
     };
     const navigateToMeetsDetail = (id) => {
-        console.log("id: ", id, typeof id, "from navigate");
         navigate(`/meetdetails/:${id}`);
+    };
+    const navigateToCalendar = () => {
+        navigate("/calendarpage");
     };
     return (
         <pathContext.Provider
@@ -33,6 +36,7 @@ function App() {
                 navigateToHome: navigateToHome,
                 navigateToMeets: navigateToMeets,
                 navigateToMeetsDetail: navigateToMeetsDetail,
+                navigateToCalendar: navigateToCalendar,
             }}>
             <Routes>
                 <Route path='/register' element={<RegisterPage />} />
@@ -40,6 +44,7 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/meets' element={<Meets />} />
                 <Route path='/meetdetails/:meetid' element={<MeetDetails />} />
+                <Route path='/calendarpage' element={<CalendarPage />} />
             </Routes>
         </pathContext.Provider>
     );

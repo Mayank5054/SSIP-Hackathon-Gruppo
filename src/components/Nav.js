@@ -39,8 +39,8 @@ const Nav = (props) => {
                         </div>
 
                         <div
-                            className='group navIteam'
-                            onClick={ctx.navigateToHome}>
+                            className='group navIteam cursor-pointere'
+                            onClick={ctx.navigateToCalendar}>
                             <img
                                 className='mx-auto'
                                 src='https://img.icons8.com/small/44/440F0F/calendar.png'
