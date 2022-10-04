@@ -35,11 +35,7 @@ const Register = (props) => {
         //according to statuscode of backend res error msg will change
         //currently it will show success for any value of email and passward
         //check if both password is same or not in back-end
-        setUser("");
-        setEmail("");
-        setPwd("");
-        setCPwd("");
-        setSuccess(true);
+       
         axios.post("http://localhost/php_practise/signup.php",{
               name:user,
               email:email,
@@ -56,6 +52,12 @@ const Register = (props) => {
                 console.log("data posted succesfully refgister.js");console.log(e);}
         )
         ;
+        
+        setUser("");
+        setEmail("");
+        setPwd("");
+        setCPwd("");
+        setSuccess(true); //need to set true only when registration is done successfully
     };
 
     return (
