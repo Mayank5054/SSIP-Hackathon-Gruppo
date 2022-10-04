@@ -1,13 +1,23 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Home from "./views/Home";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate  } from "react-router-dom";
 import LoginPage from "./views/LoginPage";
 import RegisterPage from "./views/RegisterPage";
 import Meets from "./views/Meets";
 import pathContext from "./context/path-context";
 import MeetDetails from "./views/MeetDetails";
+import axios from "axios";
 
 function App() {
+    useEffect(()=>{
+        var key=process.env.REACT_APP_API_KEY;
+        console.log(key);
+ axios.get("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + key + "&q=Surat").then(
+    (e)=>{
+      console.log(e);
+    }
+ )
+    },[])
     const navigate = useNavigate();
     const navigateToRegister = () => {
         navigate("/register");
