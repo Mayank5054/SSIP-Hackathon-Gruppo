@@ -46,7 +46,14 @@ const Register = (props) => {
               password:pwd,
               confirm_password:cPwd
         }).then(
-            (e)=>{console.log("data posted succesfully refgister.js");console.log(e);}
+            (e)=>{
+                // e.data returns  keywords described below
+                // USER_ALREADY_EXISTS == user email and password already exists
+                //USER_ACCOUNT_CREATED= new user account created
+                //EXTERNAL_DATABASE_ERROR = database connection not establised
+                //PASSWORD_NOT_SAME = password and confirm password are different
+                //REGISTER_CREDENTIALS_INVALID = email and password are not correct (validation falied);
+                console.log("data posted succesfully refgister.js");console.log(e);}
         )
         ;
     };

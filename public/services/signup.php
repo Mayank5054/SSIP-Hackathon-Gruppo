@@ -28,7 +28,6 @@ if ($password == $conf_pass) {
                 $db->query("insert into user_data values('$name','$password','$email')");
                 echo "USER_ACCOUNT_CREATED";
                 $db->close();
-
             } 
             else 
             {
@@ -38,7 +37,7 @@ if ($password == $conf_pass) {
     } 
     else 
     {
-        return "REGISTER_CREDENTIALS_INVALID";
+        echo "REGISTER_CREDENTIALS_INVALID";
     }
 } 
 else 
