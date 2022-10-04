@@ -1,18 +1,10 @@
-import React from 'react'
+import React from "react";
 
 const pathContext = React.createContext({
-    // navigateToRegister: () => {
-    //     navigate('/register');
-    // },
-    // navigateToLogin: () => {
-    //     navigate('/login');
-    // },
-    // navigateToHome: () => {
-    //     navigate('/home');
-    // },
-    // navigateToMeets: () => {
-    //     navigate('/meets');
-    // }
+    navigateToRegister: undefined,
+    navigateToLogin: undefined,
+    navigateToHome: undefined,
+    navigateToMeets: undefined,
 });
 
-export default pathContext
+export default pathContext;
