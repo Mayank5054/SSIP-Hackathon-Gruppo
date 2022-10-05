@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import MyLink from "./MyLink";
 import pathContext from "../context/path-context";
+import axios from "axios";
 import DropDownMenu from "./DropDownMenu";
 
 const Register = (props) => {
@@ -39,11 +40,29 @@ const Register = (props) => {
         //according to statuscode of backend res error msg will change
         //currently it will show success for any value of email and passward
         //check if both password is same or not in back-end
+       
+        axios.post("http://localhost/php_practise/signup.php",{
+              name:user,
+              email:email,
+              password:pwd,
+              confirm_password:cPwd
+        }).then(
+            (e)=>{
+                // e.data returns  keywords described below
+                // USER_ALREADY_EXISTS == user email and password already exists
+                //USER_ACCOUNT_CREATED= new user account created
+                //EXTERNAL_DATABASE_ERROR = database connection not establised
+                //PASSWORD_NOT_SAME = password and confirm password are different
+                //REGISTER_CREDENTIALS_INVALID = email and password are not correct (validation falied);
+                console.log("data posted succesfully refgister.js");console.log(e);}
+        )
+        ;
+        
         setUser("");
         setEmail("");
         setPwd("");
         setCPwd("");
-        setSuccess(true);
+        setSuccess(true); //need to set true only when registration is done successfully
     };
 
     return (

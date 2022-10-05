@@ -5,11 +5,11 @@ import DropDownMenu from "./DropDownMenu";
 import pathContext from "../context/path-context";
 
 const Login = (props) => {
+    localStorage.setItem("check_obj","false");
     const ctx = useContext(pathContext);
-
     const userRef = useRef();
-
-    //errRef to show different error messages
+    const [geninfo,setGeninfo]=useState({IS_LOGGED_IN:'false',email:'',password:''});
+    //errRef to show different error messages 
     const errRef = useRef();
 
     const [role, setRole] = useState("");
@@ -17,9 +17,11 @@ const Login = (props) => {
     const [pwd, setPwd] = useState("");
     const [errMsg, setErrMsg] = useState("");
     const [success, setSuccess] = useState(false);
-
+    
+  
     useEffect(() => {
         userRef.current.focus();
+        
     }, []);
 
     // to empty the error msg when user changes user name or password
@@ -33,6 +35,7 @@ const Login = (props) => {
 
 
     const HandleSubmit = async (e) => {
+        
         e.preventDefault();
         //backend integration here
         //according to statuscode of backend res error msg will change
@@ -53,7 +56,7 @@ const Login = (props) => {
                     setSuccess(true);
                     console.log(ed.data);
                 }
-                // access key word in e.data
+                // access key word in ed.data
                 // if validation incorrect e.data returns string "LOGIN_CREDENTIALS_INVALID"
                 // if authentication incorrect e.data = "USER_NOT_EXISTS"
                 // if authentication approved e.data = "UNIQUE_ID"(Ex : #59522dhjgwgbcjheb)
