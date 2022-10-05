@@ -77,7 +77,7 @@ const Nav = (props) => {
             </div>
             {props.isLoggedIn && (
                 <p className='relative text-right pr-6 my-3'>
-                    <MyLink text={"Wanna create a new meet?"} />
+                    <MyLink text={"Wanna create a new meet?"} goTo={ctx.navigateToCreateMeet}/>
                 </p>
             )}
         </nav>
