@@ -59,11 +59,8 @@ function App() {
                 navigateToHome: navigateToHome,
                 navigateToMeets: navigateToMeets,
                 navigateToMeetsDetail: navigateToMeetsDetail,
-<<<<<<< HEAD
                 navigateToCreateNewMeet: navigateToCreateNewMeet,
-=======
                 navigateToCalendar: navigateToCalendar,
->>>>>>> 030cab6a55ff2bdf69c6b686baf4be1101af8648
             }}>
             <Routes>
                 <Route path='/register' element={<RegisterPage />} />
@@ -71,11 +68,8 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/meets' element={<Meets />} />
                 <Route path='/meetdetails/:meetid' element={<MeetDetails />} />
-<<<<<<< HEAD
                 <Route path='/createnewmeet' element={<CreateNewMeet />} />
-=======
                 <Route path='/calendarpage' element={<CalendarPage />} />
->>>>>>> 030cab6a55ff2bdf69c6b686baf4be1101af8648
             </Routes>
         </pathContext.Provider>
         </LocalizationProvider>
