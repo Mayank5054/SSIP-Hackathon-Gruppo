@@ -6,13 +6,14 @@ import Nav from "../components/Nav";
 import Table from "../components/Table.js";
 import Accordion from "../components/Accordion.js";
 
-const Historypage = (props) => {
+const HistoryPage = (props) => {
   return (
     <>
       <Nav showBg={true} isLoggedIn={true} />
-      <section className="w-9/10 mx-auto relative mt-40 mb-10"></section>
-
-      <Accordion />
+      <section className="w-9/10 mx-auto relative mt-40 mb-10">
+        <Heading text={"History"} />
+        <Accordion />
+      </section>
 
       {/* <div className="flex items-start justify-center h-screen">
         <div className="bg-blue-500 bg-opacity-0">
@@ -58,4 +59,4 @@ const Historypage = (props) => {
     </>
   );
 };
-export default Historypage;
+export default HistoryPage;

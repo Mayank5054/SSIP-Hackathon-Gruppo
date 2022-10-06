@@ -1,28 +1,33 @@
 import React, { useState } from "react";
 import AccordionLayout from "./AccordionLayout";
-import allMeetings from "../data/allMeetings.json";
+import history from "../data/history.json";
 
 const Accordion = () => {
   const [activeIndex, setActiveIndex] = useState(1);
-  const allMeetingsAccordians = [];
-  for (let e in allMeetings) {
-    console.log(allMeetings[e]);
-    allMeetingsAccordians.push(
+  const historyAccordians = [];
+  for (let e in history) {
+    console.log(history[e]);
+    historyAccordians.push(
       <AccordionLayout
-        title={`${allMeetings[e].subject}
-        ${allMeetings[e].date}
-        ${allMeetings[e].time}`}
+        title={history[e].subject}
+        date={history[e].date}
+        time={history[e].time}
+        attended={history[e].attended}
         activeIndex={activeIndex}
-        index={allMeetings[e].id}
+        index={history[e].id}
+        duration={history[e].duration}
+        agenda={history[e].agenda}
+        summary_file={history[e].summary_file}
+        report={history[e].report}
+        summary={history[e].summary}
+        organizer={history[e].organizer}
         setActiveIndex={setActiveIndex}
-      >
-        {allMeetings[e].summary}
-      </AccordionLayout>
+      />
     );
   }
   return (
     <div className="flex flex-col justify-center items-center">
-      {allMeetingsAccordians}
+      {historyAccordians}
     </div>
   );
 };

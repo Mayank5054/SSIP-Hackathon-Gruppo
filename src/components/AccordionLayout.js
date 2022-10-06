@@ -1,16 +1,21 @@
 import React from "react";
-
-import {
-  BsFillArrowDownCircleFill,
-  BsFillArrowUpCircleFill,
-} from "react-icons/bs";
+import KeyboardDoubleArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowLeftOutlined";
+import MyLink from "./MyLink";
 
 const AccordionLayout = ({
   title,
-  children,
-  index,
+  date,
+  time,
+  attended,
   activeIndex,
-  setActiveIndex,
+  duration,
+  agenda,
+  summary_file,
+  report,
+  summary,
+  organizer,
+  index,
+  setActiveIndex
 }) => {
   const handleSetIndex = (index) => {
     if (activeIndex === index) {
@@ -23,24 +28,47 @@ const AccordionLayout = ({
     <>
       <div
         onClick={() => handleSetIndex(index)}
-        className="flex w-1/2 justify-between p-2 mt-2 rounded  bg-primary-900 shadow-table opacity-0.3"
+        className="grid grid-cols-7 gap-2 items-center text-left w-3/4 py-2 mt-2 rounded-t bg-secondary-600 opacity-0.3"
       >
-        <div className="flex">
-          <div className="text-white font-bold">{title}</div>
-        </div>
         <div className="flex items-center justify-center">
           {activeIndex === index ? (
-            <BsFillArrowDownCircleFill className="w-8 h-8" />
+            <div className="-rotate-90">
+              <KeyboardDoubleArrowLeftOutlinedIcon
+                sx={{ color: "#EFC6C6", fontSize: "2.5rem" }}
+              />
+            </div>
           ) : (
-            <BsFillArrowUpCircleFill className="w-8 h-8" />
+            <div className="rotate-180">
+              <KeyboardDoubleArrowLeftOutlinedIcon
+                sx={{ color: "#EFC6C6", fontSize: "2.5rem" }}
+              />
+            </div>
           )}
         </div>
+
+        <div className="text-white col-span-2">{title}</div>
+        <div className="text-white">{date}</div>
+        <div className="text-white">{time}</div>
+        {attended === "true" ? (
+          <div className="text-good">Attended</div>
+        ) : (
+          <div className="text-bad">Missed</div>
+        )}
+        <div className="text-white">Discussion</div>
       </div>
 
       {activeIndex === index && (
-        <div className="shadow-3xl flex w-1/2 rounded-2xl pt-2 bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 opacity-1 p-4 mb-6 text-cyan-50">
-          {children}
+        <div className=" grid grid-cols-4 gap-6 rounded-b px-24 pb-4 bg-secondary-600 w-3/4">
+          <div><p className="text-xl text-secondary-900">Duration</p><p className="text-secondary-800">{duration}</p></div>
+          <div><p className="text-xl text-secondary-900">Agenda Topic</p><p><MyLink text={"Download File"}/></p></div>
+          <div><p className="text-xl text-secondary-900">Summary</p><p><MyLink text={"Download File"}/></p></div>
+          <div><p className="text-xl text-secondary-900">Report</p><p><MyLink text={"Download File"}/></p></div>
+          <div className="col-span-3"><p className="text-secondary-800">{summary}</p></div>
+          <div><p className="text-xl text-secondary-900">Origanizer</p><p className="text-secondary-800">{organizer}</p></div>
         </div>
+        // <div className="shadow-3xl flex w-1/2 rounded-2xl  bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 opacity-1 p-4 mb-6 text-cyan-50">
+        //   {children}
+        // </div>
       )}
     </>
   );
