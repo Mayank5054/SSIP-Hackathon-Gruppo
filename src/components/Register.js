@@ -23,8 +23,9 @@ const Register = (props) => {
     // to empty the error msg when user changes user name or password
     useEffect(() => {
         setErrMsg("");
-    }, [formData.email, formData.pwd]);
+    }, [email, pwd]);
 
+<<<<<<< HEAD
 
     function handleChange(event){
         const {name, value} = event.target;
@@ -32,6 +33,10 @@ const Register = (props) => {
             ...prevFormData,
             [name]: value,
         }))
+=======
+    function setRoleFun(e) {
+        setRole(e.target.value);
+>>>>>>> fb57c7413807adf1df9ba0a5fca36a85d7e1fef5
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
