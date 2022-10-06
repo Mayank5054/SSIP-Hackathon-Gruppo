@@ -1,37 +1,37 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import MyLink from "./MyLink";
 import pathContext from "../context/path-context";
 import axios from "axios";
 import DropDownMenu from "./DropDownMenu";
+import InputBox from "./InputBox";
 
 const Register = (props) => {
     const ctx = useContext(pathContext);
+    const [formData, setFormData] = useState({
+        role: "",
+        userName: "",
+        email: "",
+        pwd: "",
+        cPwd: "",
+    })
 
-    const userRef = useRef();
-
-    //errRef to show different error messages
-    const errRef = useRef();
-
-    const [role, setRole] = useState("");
-    const [user, setUser] = useState("");
-    const [email, setEmail] = useState("");
-    const [pwd, setPwd] = useState("");
-    const [cPwd, setCPwd] = useState("");
     const [errMsg, setErrMsg] = useState("");
     const [success, setSuccess] = useState(false);
 
-    useEffect(() => {
-        userRef.current.focus();
-    }, []);
+    
 
     // to empty the error msg when user changes user name or password
     useEffect(() => {
         setErrMsg("");
-    }, [email, pwd]);
+    }, [formData.email, formData.pwd]);
 
 
-    function setRoleFun(e){
-        setRole(e.target.value);
+    function handleChange(event){
+        const {name, value} = event.target;
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            [name]: value,
+        }))
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -42,10 +42,10 @@ const Register = (props) => {
         //check if both password is same or not in back-end
        
         axios.post("http://localhost/php_practise/signup.php",{
-              name:user,
-              email:email,
-              password:pwd,
-              confirm_password:cPwd
+              name:formData.user,
+              email:formData.email,
+              password:formData.pwd,
+              confirm_password:formData.cPwd
         }).then(
             (e)=>{
                 // e.data returns  keywords described below
@@ -55,13 +55,15 @@ const Register = (props) => {
                 //PASSWORD_NOT_SAME = password and confirm password are different
                 //REGISTER_CREDENTIALS_INVALID = email and password are not correct (validation falied);
                 console.log("data posted succesfully refgister.js");console.log(e);}
-        )
-        ;
+        );
         
-        setUser("");
-        setEmail("");
-        setPwd("");
-        setCPwd("");
+        setFormData({
+            role: "",
+            userName: "",
+            email: "",
+            pwd: "",
+            cPwd: "",
+        });
         setSuccess(true); //need to set true only when registration is done successfully
     };
 
@@ -78,7 +80,6 @@ const Register = (props) => {
             ) : (
                 <section className='inset-x-0 top-0 container w-1/2 flex justify-center items-center flex-col'>
                     <p
-                        ref={errRef}
                         className={errMsg ? "errmsg" : "offscreen"}
                         aria-live='assertive'>
                         {errMsg}
@@ -86,53 +87,12 @@ const Register = (props) => {
                     <form
                         onSubmit={handleSubmit}
                         className='flex flex-col gap-5 text-primary-900 font-medium items-center w-1/2 '>
-                        <DropDownMenu className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine" value={role} text="Choose Your Role" handleChange={setRoleFun}/>
-
-                        <input
-                            type='text'
-                            id='userName'
-                            placeholder='User Name'
-                            ref={userRef}
-                            autoComplete='off'
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
-                            required
-                            className='w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine'
-                        />
-
-                        <input
-                            type='email'
-                            id='email'
-                            placeholder='E-Mail'
-                            ref={userRef}
-                            autoComplete='off'
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                            required
-                            className='w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine'
-                        />
-
-                        <input
-                            type='password'
-                            id='password'
-                            placeholder='Password'
-                            onChange={(e) => setPwd(e.target.value)}
-                            value={pwd}
-                            required
-                            className='w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine'
-                        />
-
-                        <input
-                            type='password'
-                            id='confrimPassword'
-                            placeholder='Confrim Password'
-                            onChange={(e) => setCPwd(e.target.value)}
-                            value={cPwd}
-                            required
-                            className='w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine'
-                        />
-
-                        <button className='bg-linkColor z-40 rounded-md mt-6 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine'>
+                        <DropDownMenu className="w-full rounded p-4 text-primary-900 font-medium outline-primary-900 shadow-mine" value={formData.role} text="Choose Your Role" handleChange={handleChange}/>
+                        <InputBox type="text" name="userName" placeHolder="User Name" value={formData.userName} required={true} autoComplete="off" handleChange={handleChange} className="shadow-mine"/>
+                        <InputBox type="email" name="email" placeHolder="E-Mail" value={formData.email} required={true} autoComplete="off" handleChange={handleChange} className="shadow-mine"/>
+                        <InputBox type="password" name="pwd" placeHolder="Password" value={formData.pwd} required={true} autoComplete="off" handleChange={handleChange} className="shadow-mine"/>
+                        <InputBox type="password" name="cPwd" placeHolder="Confrim Password" value={formData.cPwd} required autoComplete="off" handleChange={handleChange} className="shadow-mine"/>
+                        <button className='bg-linkColor z-40 rounded-md mt-2 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine'>
                             REGISTER
                         </button>
                     </form>
