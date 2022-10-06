@@ -29,8 +29,7 @@ const Register = (props) => {
         setErrMsg("");
     }, [email, pwd]);
 
-
-    function setRoleFun(e){
+    function setRoleFun(e) {
         setRole(e.target.value);
     }
     const handleSubmit = async (e) => {
@@ -40,24 +39,25 @@ const Register = (props) => {
         //according to statuscode of backend res error msg will change
         //currently it will show success for any value of email and passward
         //check if both password is same or not in back-end
-       
-        axios.post("http://localhost/php_practise/signup.php",{
-              name:user,
-              email:email,
-              password:pwd,
-              confirm_password:cPwd
-        }).then(
-            (e)=>{
+
+        axios
+            .post("http://localhost/php_practise/signup.php", {
+                name: user,
+                email: email,
+                password: pwd,
+                confirm_password: cPwd,
+            })
+            .then((e) => {
                 // e.data returns  keywords described below
                 // USER_ALREADY_EXISTS == user email and password already exists
                 //USER_ACCOUNT_CREATED= new user account created
                 //EXTERNAL_DATABASE_ERROR = database connection not establised
                 //PASSWORD_NOT_SAME = password and confirm password are different
                 //REGISTER_CREDENTIALS_INVALID = email and password are not correct (validation falied);
-                console.log("data posted succesfully refgister.js");console.log(e);}
-        )
-        ;
-        
+                console.log("data posted succesfully refgister.js");
+                console.log(e);
+            });
+
         setUser("");
         setEmail("");
         setPwd("");
@@ -86,7 +86,12 @@ const Register = (props) => {
                     <form
                         onSubmit={handleSubmit}
                         className='flex flex-col gap-5 text-primary-900 font-medium items-center w-1/2 '>
-                        <DropDownMenu className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine" value={role} text="Choose Your Role" handleChange={setRoleFun}/>
+                        <DropDownMenu
+                            className='w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine'
+                            value={role}
+                            text='Choose Your Role'
+                            handleChange={setRoleFun}
+                        />
 
                         <input
                             type='text'
