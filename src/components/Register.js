@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import MyLink from "./MyLink";
 import pathContext from "../context/path-context";
 import axios from "axios";
+import DropDownMenu from "./DropDownMenu";
 
 const Register = (props) => {
     const ctx = useContext(pathContext);
@@ -28,6 +29,10 @@ const Register = (props) => {
         setErrMsg("");
     }, [email, pwd]);
 
+
+    function setRoleFun(e){
+        setRole(e.target.value);
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -61,7 +66,7 @@ const Register = (props) => {
     };
 
     return (
-        <div className="bg-[url('./../public/style01.png')] bg-fixed w-full flex justify-center bg-no-repeat bg-center h-screen">
+        <div className="bg-[url('./../public/images/style01.png')] bg-fixed w-full flex justify-center bg-no-repeat bg-center h-screen">
             {success ? (
                 <section className='flex justify-center flex-col'>
                     <h1 className='text-white text-3xl font-medium'>
@@ -81,18 +86,7 @@ const Register = (props) => {
                     <form
                         onSubmit={handleSubmit}
                         className='flex flex-col gap-5 text-primary-900 font-medium items-center w-1/2 '>
-                        <select
-                            value={role}
-                            required
-                            onChange={(e) => setRole(e.target.value)}
-                            className='w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine'>
-                            <option className=''>Choose role</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
+                        <DropDownMenu className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine" value={role} text="Choose Your Role" handleChange={setRoleFun}/>
 
                         <input
                             type='text'

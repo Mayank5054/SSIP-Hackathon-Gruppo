@@ -39,8 +39,8 @@ const Nav = (props) => {
                         </div>
 
                         <div
-                            className='group navIteam'
-                            onClick={ctx.navigateToHome}>
+                            className='group navIteam cursor-pointer'
+                            onClick={ctx.navigateToCalendar}>
                             <img
                                 className='mx-auto'
                                 src='https://img.icons8.com/small/44/440F0F/calendar.png'
@@ -77,7 +77,7 @@ const Nav = (props) => {
             </div>
             {props.isLoggedIn && (
                 <p className='relative text-right pr-6 my-3'>
-                    <MyLink text={"Wanna create a new meet?"} />
+                    <MyLink text={"Wanna create a new meet?"} goTo={ctx.navigateToCreateMeet}/>
                 </p>
             )}
         </nav>

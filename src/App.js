@@ -1,23 +1,33 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import Home from "./views/Home";
-import { Routes, Route, useNavigate  } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import LoginPage from "./views/LoginPage";
 import RegisterPage from "./views/RegisterPage";
 import Meets from "./views/Meets";
 import pathContext from "./context/path-context";
 import MeetDetails from "./views/MeetDetails";
+import CalendarPage from "./views/calendarPage";
 import axios from "axios";
 
+import CreateNewMeet from "./views/CreateNewMeet";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
+
+
 function App() {
-    useEffect(()=>{
-        var key=process.env.REACT_APP_API_KEY;
+    useEffect(() => {
+        var key = process.env.REACT_APP_API_KEY;
         console.log(key);
- axios.get("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" + key + "&q=Surat").then(
-    (e)=>{
-      console.log(e);
-    }
- )
-    },[])
+        axios
+            .get(
+                "http://dataservice.accuweather.com/locations/v1/cities/search?apikey=" +
+                    key +
+                    "&q=Surat"
+            )
+            .then((e) => {
+                console.log(e);
+            });
+    }, []);
     const navigate = useNavigate();
     const navigateToRegister = () => {
         navigate("/register");
@@ -31,18 +41,26 @@ function App() {
     const navigateToMeets = () => {
         navigate("/meets");
     };
+    const navigateToCreateNewMeet = () => {
+        navigate("/createnewmeet");
+    };
     const navigateToMeetsDetail = (id) => {
-        console.log("id: ", id, typeof id, "from navigate");
         navigate(`/meetdetails/:${id}`);
     };
+    const navigateToCalendar = () => {
+        navigate("/calendarpage");
+    };
     return (
-        <pathContext.Provider
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <pathContext.Provider
             value={{
                 navigateToRegister: navigateToRegister,
                 navigateToLogin: navigateToLogin,
                 navigateToHome: navigateToHome,
                 navigateToMeets: navigateToMeets,
                 navigateToMeetsDetail: navigateToMeetsDetail,
+                navigateToCreateNewMeet: navigateToCreateNewMeet,
+                navigateToCalendar: navigateToCalendar,
             }}>
             <Routes>
                 <Route path='/register' element={<RegisterPage />} />
@@ -50,8 +68,12 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/meets' element={<Meets />} />
                 <Route path='/meetdetails/:meetid' element={<MeetDetails />} />
+                <Route path='/createnewmeet' element={<CreateNewMeet />} />
+                <Route path='/calendarpage' element={<CalendarPage />} />
             </Routes>
         </pathContext.Provider>
+        </LocalizationProvider>
+        
     );
 }
 

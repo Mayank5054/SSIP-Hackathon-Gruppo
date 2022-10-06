@@ -7,6 +7,7 @@ module.exports = {
                 primary: {
                     900: "#440F0F", // background color
                     800: "#952B2B", // box shadow color
+                    200: "#EFC6C6", //pinkish color
                 },
                 secondary: {
                     900: "#EFECEC", // for white background

@@ -5,6 +5,7 @@ const pathContext = React.createContext({
     navigateToLogin: undefined,
     navigateToHome: undefined,
     navigateToMeets: undefined,
+    navigateToCreateMeet: undefined,
 });
 
 export default pathContext;
