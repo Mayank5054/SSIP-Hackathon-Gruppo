@@ -23,9 +23,9 @@ const Register = (props) => {
     // to empty the error msg when user changes user name or password
     useEffect(() => {
         setErrMsg("");
-    }, [email, pwd]);
+    }, [formData.email, formData.emailpwd]);
 
-<<<<<<< HEAD
+
 
     function handleChange(event){
         const {name, value} = event.target;
@@ -33,11 +33,7 @@ const Register = (props) => {
             ...prevFormData,
             [name]: value,
         }))
-=======
-    function setRoleFun(e) {
-        setRole(e.target.value);
->>>>>>> fb57c7413807adf1df9ba0a5fca36a85d7e1fef5
-    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -92,7 +88,7 @@ const Register = (props) => {
                     <form
                         onSubmit={handleSubmit}
                         className='flex flex-col gap-5 text-primary-900 font-medium items-center w-1/2 '>
-                        <DropDownMenu className="w-full rounded p-4 text-primary-900 font-medium outline-primary-900 shadow-mine" value={formData.role} text="Choose Your Role" handleChange={handleChange}/>
+                        <DropDownMenu name="role" className="w-full rounded p-4 text-primary-900 font-medium outline-primary-900 shadow-mine" value={formData.role} text="Choose Your Role" handleChange={handleChange}/>
                         <InputBox type="text" name="userName" placeHolder="User Name" value={formData.userName} required={true} autoComplete="off" handleChange={handleChange} className="shadow-mine"/>
                         <InputBox type="email" name="email" placeHolder="E-Mail" value={formData.email} required={true} autoComplete="off" handleChange={handleChange} className="shadow-mine"/>
                         <InputBox type="password" name="pwd" placeHolder="Password" value={formData.pwd} required={true} autoComplete="off" handleChange={handleChange} className="shadow-mine"/>
