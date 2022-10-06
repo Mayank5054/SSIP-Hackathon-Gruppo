@@ -21,9 +21,9 @@ const CalendarPart = () => {
         <>
             <div className='flex justify-evenly items-center'>
                 <div className='text-center w-2/5'>
-                    <Heading
-                        text={month[(parseInt(currentMonth) - 1 + 12) % 12]}
-                    />
+                    <h1 className='text-3xl text-secondary-800'>
+                        {month[(parseInt(currentMonth) - 1 + 12) % 12]}
+                    </h1>
                     <p className='text-linkColor'>7 meetings attended</p>
                 </div>
                 <div className='w-1/5'>
@@ -34,7 +34,10 @@ const CalendarPart = () => {
                     />
                 </div>
                 <div className='text-center w-2/5'>
-                    <Heading text={month[(parseInt(currentMonth) + 1) % 12]} />
+                    <h1 className='text-3xl text-secondary-800'>
+                        {month[(parseInt(currentMonth) + 1) % 12]}
+                    </h1>
+
                     <p className='text-linkColor'>
                         14 meets in {month[(parseInt(currentMonth) + 1) % 12]}
                     </p>

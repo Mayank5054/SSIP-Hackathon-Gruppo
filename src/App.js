@@ -10,9 +10,8 @@ import CalendarPage from "./views/calendarPage";
 import axios from "axios";
 
 import CreateNewMeet from "./views/CreateNewMeet";
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
-
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 function App() {
     useEffect(() => {
@@ -42,6 +41,7 @@ function App() {
         navigate("/meets");
     };
     const navigateToCreateNewMeet = () => {
+        console.log("inside new meet nevigator");
         navigate("/createnewmeet");
     };
     const navigateToMeetsDetail = (id) => {
@@ -53,27 +53,29 @@ function App() {
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <pathContext.Provider
-            value={{
-                navigateToRegister: navigateToRegister,
-                navigateToLogin: navigateToLogin,
-                navigateToHome: navigateToHome,
-                navigateToMeets: navigateToMeets,
-                navigateToMeetsDetail: navigateToMeetsDetail,
-                navigateToCreateNewMeet: navigateToCreateNewMeet,
-                navigateToCalendar: navigateToCalendar,
-            }}>
-            <Routes>
-                <Route path='/register' element={<RegisterPage />} />
-                <Route path='/login' element={<LoginPage />} />
-                <Route path='/' element={<Home />} />
-                <Route path='/meets' element={<Meets />} />
-                <Route path='/meetdetails/:meetid' element={<MeetDetails />} />
-                <Route path='/createnewmeet' element={<CreateNewMeet />} />
-                <Route path='/calendarpage' element={<CalendarPage />} />
-            </Routes>
-        </pathContext.Provider>
+                value={{
+                    navigateToRegister: navigateToRegister,
+                    navigateToLogin: navigateToLogin,
+                    navigateToHome: navigateToHome,
+                    navigateToMeets: navigateToMeets,
+                    navigateToMeetsDetail: navigateToMeetsDetail,
+                    navigateToCreateNewMeet: navigateToCreateNewMeet,
+                    navigateToCalendar: navigateToCalendar,
+                }}>
+                <Routes>
+                    <Route path='/register' element={<RegisterPage />} />
+                    <Route path='/login' element={<LoginPage />} />
+                    <Route path='/' element={<Home />} />
+                    <Route path='/meets' element={<Meets />} />
+                    <Route
+                        path='/meetdetails/:meetid'
+                        element={<MeetDetails />}
+                    />
+                    <Route path='/createnewmeet' element={<CreateNewMeet />} />
+                    <Route path='/calendarpage' element={<CalendarPage />} />
+                </Routes>
+            </pathContext.Provider>
         </LocalizationProvider>
-        
     );
 }
 
