@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../components/Nav";
 import Heading from "../components/Heading";
 import InputBox from "../components/InputBox";
@@ -10,39 +10,55 @@ import TimePickerBox from "../components/TimePickerBox";
 import LibraryAddOutlinedIcon from "@mui/icons-material/LibraryAddOutlined";
 
 function CreateNewMeet() {
-    const [title, setTitle] = useState("");
-    const [venue, setVenue] = useState("");
-    const [department, setDepartment] = useState("");
+   
     const [date, setDate] = useState(new Date());
-    const [time, setTime] = useState(new Date().toLocaleString());
-    function setTitleFun(e) {
-        setTitle(e.target.value);
-    }
+    const [time, setTime] = useState(new Date());
+//in DB extract date as time.toLocaleDateString() (because while selecting date it will select current time by default)
+ //in DB extract time as time.toLocaleTimeString() (because while selecting time it will select current date by default)
+    const [formData, setFormData] = useState({
+        title: "",
+        venue: "",
+        department: "",
+        date: date,
+        time: time, 
+    });
 
-    function setVenueFun(e) {
-        setVenue(e.target.value);
-    }
+    
 
-    function setDepartmentFun(e) {
-        setDepartment(e.target.value);
+    function handleChange(event){
+        const {name, value} = event.target;
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            [name]: value,
+        })) 
     }
 
     function setDateFun(e) {
         setDate(e);
     }
-
     function setTimeFun(e) {
         setTime(e);
     }
-    const handleSubmit = async (e) => {
+    useEffect(() => {
+        formData.time = time;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [time]);
+    
+    useEffect(() => {
+        formData.date = date;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [date]);
+     const handleSubmit = async (e) => {
         e.preventDefault();
-        setTitle("");
-        setVenue("");
-        setTime(new Date().toLocaleString());
-        setDate(new Date());
-        setDepartment("");
+        setFormData({
+            title: "",
+            venue: "",
+            department: "",
+            date: new Date(),
+            time: new Date(),
+        });
     };
-
+    
     return (
         <>
             <Nav showBg={true} isLoggedIn={true} />
@@ -56,9 +72,11 @@ function CreateNewMeet() {
                             <InputBox
                                 className='my-2'
                                 type='text'
-                                value={title}
+                                name="title"
+                                value={formData.title}
                                 placeHolder='Meet Title'
-                                handleChange={setTitleFun}
+                                handleChange={handleChange}
+                                required={true}
                             />
 
                             <DatePickerBox
@@ -66,6 +84,7 @@ function CreateNewMeet() {
                                 handleChange={setDateFun}
                             />
                             <TimePickerBox
+                                name="time"
                                 value={time}
                                 handleChange={setTimeFun}
                             />
@@ -73,17 +92,20 @@ function CreateNewMeet() {
                             <InputBox
                                 className='my-2'
                                 type='text'
-                                value={venue}
+                                name="venue"
+                                value={formData.venue}
                                 placeHolder='Venue'
-                                handleChange={setVenueFun}
+                                handleChange={handleChange}
                             />
                             <DropDownMenu
                                 className='my-2 w-full rounded p-4 text-primary-900 font-medium outline-primary-900'
-                                value={department}
+                                value={formData.department}
+                                name="department"
                                 text='Add Department'
-                                handleChange={setDepartmentFun}
+                                handleChange={handleChange}
                             />
                         </div>
+                        {console.log(formData)}
                         <div className='col-start-8 col-span-4 bg-primary-900/50 shadow-mine p-4 rounded'>
                             <a
                                 href='#'
@@ -93,6 +115,7 @@ function CreateNewMeet() {
                             </a>
                             {Object.keys(PeopleData).map((id) => (
                                 <People
+                                    key={id}
                                     imgUrl={PeopleData[id].img}
                                     name={PeopleData[id].name}
                                     role={PeopleData[id].role}
