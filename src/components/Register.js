@@ -5,6 +5,7 @@ import axios from "axios";
 import DropDownMenu from "./DropDownMenu";
 import InputBox from "./InputBox";
 
+
 const Register = (props) => {
     const ctx = useContext(pathContext);
     const [formData, setFormData] = useState({
@@ -33,7 +34,7 @@ const Register = (props) => {
             ...prevFormData,
             [name]: value,
         }))
-
+    }   
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -55,7 +56,9 @@ const Register = (props) => {
                 //EXTERNAL_DATABASE_ERROR = database connection not establised
                 //PASSWORD_NOT_SAME = password and confirm password are different
                 //REGISTER_CREDENTIALS_INVALID = email and password are not correct (validation falied);
-                console.log("data posted succesfully refgister.js");console.log(e);}
+                console.log("data posted succesfully refgister.js");
+                console.log(e);
+            }
         );
         
         setFormData({
@@ -107,8 +110,7 @@ const Register = (props) => {
                     </div>
                 </section>
             )}
-        </div>
-    );
+        </div>);
 };
 
 export default Register;
