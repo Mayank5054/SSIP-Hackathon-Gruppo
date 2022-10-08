@@ -6,10 +6,9 @@ import pathContext from "../context/path-context";
 import InputBox from "./InputBox";
 
 const Login = (props) => {
-    localStorage.setItem("check_obj","false");
+    localStorage.setItem("check_obj", "false");
     const ctx = useContext(pathContext);
-    const [geninfo,setGeninfo] = useState({IS_LOGGED_IN:'false',email:'',password:''});
-    
+    // const [geninfo,setGeninfo] = useState({IS_LOGGED_IN:'false',email:'',password:''});
 
     //instead of different useState combined the form data into one single object
     const [formData, setFormData] = useState({
@@ -19,26 +18,21 @@ const Login = (props) => {
     });
     const [errMsg, setErrMsg] = useState("");
     const [success, setSuccess] = useState(false);
-    
-  
-    
 
     // to empty the error msg when user changes user name or password
     useEffect(() => {
         setErrMsg("");
     }, [formData.email, formData.pwd]);
 
-    
-    function handleChange(event){
-        const {name, value} = event.target;
-        setFormData(prevFormData => ({
+    function handleChange(event) {
+        const { name, value } = event.target;
+        setFormData((prevFormData) => ({
             ...prevFormData,
             [name]: value,
-        }))
+        }));
     }
 
     const HandleSubmit = async (e) => {
-        
         e.preventDefault();
         //backend integration here
         //according to statuscode of backend res error msg will change
@@ -84,19 +78,38 @@ const Login = (props) => {
                 </section>
             ) : (
                 <section className='inset-x-0 top-0 container w-1/2 flex justify-center items-center flex-col'>
-                    <p className={errMsg ? "errmsg" : "offscreen"}>
-                        {errMsg}
-                    </p>
+                    <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
                     <form
                         onSubmit={HandleSubmit}
                         className='flex flex-col gap-5 text-primary-900 font-medium items-center w-1/2 '>
-                        <DropDownMenu className="w-full rounded p-4 text-primary-900 font-medium outline-primary-900 shadow-mine" name="role" value={formData.role} text="Choose Your Role" handleChange={handleChange}/>
+                        <DropDownMenu
+                            className='w-full rounded p-4 text-primary-900 font-medium outline-primary-900 shadow-mine'
+                            name='role'
+                            value={formData.role}
+                            text='Choose Your Role'
+                            handleChange={handleChange}
+                        />
 
-                        
-                        <InputBox type="email" name="email" value={formData.email} handleChange={handleChange} required={true} autoComplete="off" placeHolder="E-Mail" className='shadow-mine'/>
-                        <InputBox type="password" name="pwd" value={formData.pwd} handleChange={handleChange} required={true} autoComplete="off" placeHolder="Password" className='shadow-mine'/>
-                       
-
+                        <InputBox
+                            type='email'
+                            name='email'
+                            value={formData.email}
+                            handleChange={handleChange}
+                            required={true}
+                            autoComplete='off'
+                            placeHolder='E-Mail'
+                            className='shadow-mine'
+                        />
+                        <InputBox
+                            type='password'
+                            name='pwd'
+                            value={formData.pwd}
+                            handleChange={handleChange}
+                            required={true}
+                            autoComplete='off'
+                            placeHolder='Password'
+                            className='shadow-mine'
+                        />
 
                         <button className='bg-linkColor z-40 rounded-md mt-2 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine'>
                             LOGIN

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
-import Heading from "./Heading";
 import TodayInfo from "./TodayInfo";
-import allMeetings from "../data/allMeetings.json";
 
 import month from "../data/month.json";
 

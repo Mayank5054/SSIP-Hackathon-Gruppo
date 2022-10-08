@@ -10,27 +10,24 @@ import TimePickerBox from "../components/TimePickerBox";
 import LibraryAddOutlinedIcon from "@mui/icons-material/LibraryAddOutlined";
 
 function CreateNewMeet() {
-   
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(new Date());
-//in DB extract date as time.toLocaleDateString() (because while selecting date it will select current time by default)
- //in DB extract time as time.toLocaleTimeString() (because while selecting time it will select current date by default)
+    //in DB extract date as time.toLocaleDateString() (because while selecting date it will select current time by default)
+    //in DB extract time as time.toLocaleTimeString() (because while selecting time it will select current date by default)
     const [formData, setFormData] = useState({
         title: "",
         venue: "",
         department: "",
         date: date,
-        time: time, 
+        time: time,
     });
 
-    
-
-    function handleChange(event){
-        const {name, value} = event.target;
-        setFormData(prevFormData => ({
+    function handleChange(event) {
+        const { name, value } = event.target;
+        setFormData((prevFormData) => ({
             ...prevFormData,
             [name]: value,
-        })) 
+        }));
     }
 
     function setDateFun(e) {
@@ -41,14 +38,14 @@ function CreateNewMeet() {
     }
     useEffect(() => {
         formData.time = time;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [time]);
-    
+
     useEffect(() => {
         formData.date = date;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [date]);
-     const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setFormData({
             title: "",
@@ -58,7 +55,7 @@ function CreateNewMeet() {
             time: new Date(),
         });
     };
-    
+
     return (
         <>
             <Nav showBg={true} isLoggedIn={true} />
@@ -72,7 +69,7 @@ function CreateNewMeet() {
                             <InputBox
                                 className='my-2'
                                 type='text'
-                                name="title"
+                                name='title'
                                 value={formData.title}
                                 placeHolder='Meet Title'
                                 handleChange={handleChange}
@@ -84,7 +81,7 @@ function CreateNewMeet() {
                                 handleChange={setDateFun}
                             />
                             <TimePickerBox
-                                name="time"
+                                name='time'
                                 value={time}
                                 handleChange={setTimeFun}
                             />
@@ -92,7 +89,7 @@ function CreateNewMeet() {
                             <InputBox
                                 className='my-2'
                                 type='text'
-                                name="venue"
+                                name='venue'
                                 value={formData.venue}
                                 placeHolder='Venue'
                                 handleChange={handleChange}
@@ -100,7 +97,7 @@ function CreateNewMeet() {
                             <DropDownMenu
                                 className='my-2 w-full rounded p-4 text-primary-900 font-medium outline-primary-900'
                                 value={formData.department}
-                                name="department"
+                                name='department'
                                 text='Add Department'
                                 handleChange={handleChange}
                             />
@@ -108,7 +105,7 @@ function CreateNewMeet() {
                         {console.log(formData)}
                         <div className='col-start-8 col-span-4 bg-primary-900/50 shadow-mine p-4 rounded'>
                             <a
-                                href='#'
+                                href='http://localhost:3000'
                                 className='text-primary-200 text-2xl items-center'>
                                 <LibraryAddOutlinedIcon /> Click to invite
                                 people

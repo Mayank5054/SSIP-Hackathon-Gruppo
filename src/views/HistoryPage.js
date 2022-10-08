@@ -1,21 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Heading from "../components/Heading.js";
-import MyLink from "../components/MyLink.js";
 import Nav from "../components/Nav";
-import Table from "../components/Table.js";
 import Accordion from "../components/Accordion.js";
 
 const HistoryPage = (props) => {
-  return (
-    <>
-      <Nav showBg={true} isLoggedIn={true} />
-      <section className="w-9/10 mx-auto relative mt-40 mb-10">
-        <Heading text={"History"} />
-        <Accordion />
-      </section>
+    return (
+        <>
+            <Nav showBg={true} isLoggedIn={true} />
+            <section className='w-9/10 mx-auto relative mt-40 mb-10'>
+                <Heading text={"History"} />
+                <Accordion />
+            </section>
 
-      {/* <div className="flex items-start justify-center h-screen">
+            {/* <div className="flex items-start justify-center h-screen">
         <div className="bg-blue-500 bg-opacity-0">
           <div className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8">
             <div className="space-y-4">
@@ -56,7 +54,7 @@ const HistoryPage = (props) => {
           </div>
         </div>
   </div>*/}
-    </>
-  );
+        </>
+    );
 };
 export default HistoryPage;
