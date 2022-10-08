@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import Home from "./views/Home";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import LoginPage from "./views/LoginPage";
@@ -8,14 +8,14 @@ import pathContext from "./context/path-context";
 import MeetDetails from "./views/MeetDetails";
 import CalendarPage from "./views/calendarPage";
 import HistoryPage from "./views/HistoryPage";
-// import axios from "axios";
+import axios from "axios";
 
 import CreateNewMeet from "./views/CreateNewMeet";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 function App() {
-    // const WEATHER_API_KEY = "Tb4Gz2pnEFTA3ga7CjYi8nCTWdHWAE60";
+    const WEATHER_API_KEY = "Tb4Gz2pnEFTA3ga7CjYi8nCTWdHWAE60";
 
     // const gapi = window.gapi;
     // console.log(gapi);
@@ -59,56 +59,59 @@ function App() {
     //                 });
     //             });
     //     });
-    // };
+    //
 
-    const [lat, setLat] = useState(null);
-    const [lng, setLng] = useState(null);
-    const [status, setStatus] = useState(null);
+    // var [lat, setLat] = useState(null);
+    // var [lng, setLng] = useState(null);
+    // var [status, setStatus] = useState(null);
 
-    const getLocation = useCallback(() => {
-        if (!navigator.geolocation) {
-            setStatus("Geolocation is not supported by your browser");
-        } else {
-            setStatus("Locating...");
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    console.log(
-                        position.coords.latitude,
-                        position.coords.longitude,
-                        "from response directly"
-                    );
-                    setStatus(null);
-                    setLat(position.coords.latitude);
-                    setLng(position.coords.longitude);
-                },
-                () => {
-                    setStatus("Unable to retrieve your location");
-                }
-            );
-        }
-    }, []);
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            getLocation();
-            console.log(lat, lng, status, "from state variable");
-        }, 5000);
-
-        return () => {
-            clearTimeout(timeout);
+        const getWeatherInfo = (locationKey) => {
+            console.log(locationKey, "location keyyy");
+            axios
+                .get(
+                    `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${WEATHER_API_KEY} HTTP/1.1`
+                )
+                .then((e) => {
+                    console.log(e, "weather info");
+                })
+                .catch((e) => {
+                    console.log(e, "weather error");
+                });
         };
 
-        // const key = WEATHER_API_KEY;
-        // axios
-        //     .get(
-        //         `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${key}&q=${position.latitude}%2C${position.longitude}`
-        //     )
-        //     .then((e) => {
-        //         console.log(e);
-        //     })
-        //     .catch((e) => {
-        //         console.log(e);
-        //     });
-    }, [getLocation]);
+        const getLocationKey = (lat, lng) => {
+            axios
+                .get(
+                    `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${WEATHER_API_KEY}&q=${lat}%2C${lng}`
+                )
+                .then((e) => {
+                    getWeatherInfo(e.data.Key);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        };
+
+        const getLocation = () => {
+            if (!navigator.geolocation) {
+                // setStatus("Geolocation is not supported by your browser");
+            } else {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        getLocationKey(
+                            position.coords.latitude,
+                            position.coords.longitude
+                        );
+                    },
+                    () => {
+                        // setStatus("Unable to retrieve your location");
+                    }
+                );
+            }
+        };
+        getLocation();
+    }, []);
 
     const navigate = useNavigate();
     const navigateToRegister = () => {
