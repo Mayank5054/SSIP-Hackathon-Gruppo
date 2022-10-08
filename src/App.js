@@ -15,7 +15,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 function App() {
-    const WEATHER_API_KEY = "Tb4Gz2pnEFTA3ga7CjYi8nCTWdHWAE60";
+    const WEATHER_API_KEY =process.env.REACT_APP_API_KEY;
 
     // const gapi = window.gapi;
     // console.log(gapi);
@@ -70,7 +70,7 @@ function App() {
             console.log(locationKey, "location keyyy");
             axios
                 .get(
-                    `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${WEATHER_API_KEY} HTTP/1.1`
+                    `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${WEATHER_API_KEY}`
                 )
                 .then((e) => {
                     console.log(e, "weather info");
@@ -89,6 +89,7 @@ function App() {
                     getWeatherInfo(e.data.Key);
                 })
                 .catch((e) => {
+                    console.log("key_finder");
                     console.log(e);
                 });
         };
