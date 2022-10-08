@@ -1,41 +1,38 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import MyLink from "./MyLink";
 import DropDownMenu from "./DropDownMenu";
 import pathContext from "../context/path-context";
+import InputBox from "./InputBox";
 
 const Login = (props) => {
-    localStorage.setItem("check_obj","false");
+    localStorage.setItem("check_obj", "false");
     const ctx = useContext(pathContext);
-    const userRef = useRef();
-    const [geninfo,setGeninfo]=useState({IS_LOGGED_IN:'false',email:'',password:''});
-    //errRef to show different error messages 
-    const errRef = useRef();
+    // const [geninfo,setGeninfo] = useState({IS_LOGGED_IN:'false',email:'',password:''});
 
-    const [role, setRole] = useState("");
-    const [email, setEmail] = useState("");
-    const [pwd, setPwd] = useState("");
+    //instead of different useState combined the form data into one single object
+    const [formData, setFormData] = useState({
+        email: "",
+        pwd: "",
+        role: "",
+    });
     const [errMsg, setErrMsg] = useState("");
     const [success, setSuccess] = useState(false);
-    
-  
-    useEffect(() => {
-        userRef.current.focus();
-        
-    }, []);
 
     // to empty the error msg when user changes user name or password
     useEffect(() => {
         setErrMsg("");
-    }, [email, pwd]);
+    }, [formData.email, formData.pwd]);
 
-    function setRoleFun(e){
-        setRole(e.target.value);
+    function handleChange(event) {
+        const { name, value } = event.target;
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value,
+        }));
     }
 
-
     const HandleSubmit = async (e) => {
-        
         e.preventDefault();
         //backend integration here
         //according to statuscode of backend res error msg will change
@@ -47,8 +44,8 @@ const Login = (props) => {
         // php-practise is my local folder you can add your link .
         axios
             .post("http://localhost/php_practise/handle01.php", {
-                email: email,
-                password: pwd,
+                email: formData.email,
+                password: formData.pwd,
             })
             .then(
                 (ed) => {
@@ -62,8 +59,11 @@ const Login = (props) => {
                 // if authentication approved e.data = "UNIQUE_ID"(Ex : #59522dhjgwgbcjheb)
             );
 
-        setEmail("");
-        setPwd("");
+        setFormData({
+            email: "",
+            pwd: "",
+            role: "",
+        });
     };
 
     return (
@@ -78,39 +78,40 @@ const Login = (props) => {
                 </section>
             ) : (
                 <section className='inset-x-0 top-0 container w-1/2 flex justify-center items-center flex-col'>
-                    <p
-                        ref={errRef}
-                        className={errMsg ? "errmsg" : "offscreen"}
-                        aria-live='assertive'>
-                        {errMsg}
-                    </p>
+                    <p className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
                     <form
                         onSubmit={HandleSubmit}
                         className='flex flex-col gap-5 text-primary-900 font-medium items-center w-1/2 '>
-                        <DropDownMenu className="w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine" value={role} text="Choose Your Role" handleChange={setRoleFun}/>
+                        <DropDownMenu
+                            className='w-full rounded p-4 text-primary-900 font-medium outline-primary-900 shadow-mine'
+                            name='role'
+                            value={formData.role}
+                            text='Choose Your Role'
+                            handleChange={handleChange}
+                        />
 
-                        <input
+                        <InputBox
                             type='email'
-                            id='email'
-                            placeholder='E-Mail'
-                            ref={userRef}
+                            name='email'
+                            value={formData.email}
+                            handleChange={handleChange}
+                            required={true}
                             autoComplete='off'
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                            required
-                            className='w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine'
+                            placeHolder='E-Mail'
+                            className='shadow-mine'
+                        />
+                        <InputBox
+                            type='password'
+                            name='pwd'
+                            value={formData.pwd}
+                            handleChange={handleChange}
+                            required={true}
+                            autoComplete='off'
+                            placeHolder='Password'
+                            className='shadow-mine'
                         />
 
-                        <input
-                            type='password'
-                            id='password'
-                            placeholder='Password'
-                            onChange={(e) => setPwd(e.target.value)}
-                            value={pwd}
-                            required
-                            className='w-full rounded p-3 text-primary-900 font-medium outline-primary-900 shadow-mine'
-                        />
-                        <button className='bg-linkColor z-40 rounded-md mt-6 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine'>
+                        <button className='bg-linkColor z-40 rounded-md mt-2 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine'>
                             LOGIN
                         </button>
                     </form>
