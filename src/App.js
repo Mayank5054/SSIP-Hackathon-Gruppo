@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Home from "./views/Home";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import LoginPage from "./views/LoginPage";
@@ -15,7 +15,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 function App() {
-    const WEATHER_API_KEY =process.env.REACT_APP_API_KEY;
+    const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API;
 
     // const gapi = window.gapi;
     // console.log(gapi);
@@ -66,11 +66,12 @@ function App() {
     // var [status, setStatus] = useState(null);
 
     useEffect(() => {
+        const key = WEATHER_API_KEY;
         const getWeatherInfo = (locationKey) => {
             console.log(locationKey, "location keyyy");
             axios
                 .get(
-                    `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${WEATHER_API_KEY}`
+                    `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${key}`
                 )
                 .then((e) => {
                     console.log(e, "weather info");
@@ -81,6 +82,7 @@ function App() {
         };
 
         const getLocationKey = (lat, lng) => {
+            console.log(lat, lng);
             axios
                 .get(
                     `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${WEATHER_API_KEY}&q=${lat}%2C${lng}`
@@ -112,7 +114,7 @@ function App() {
             }
         };
         getLocation();
-    }, []);
+    }, [WEATHER_API_KEY]);
 
     const navigate = useNavigate();
     const navigateToRegister = () => {
