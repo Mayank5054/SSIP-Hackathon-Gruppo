@@ -3,7 +3,7 @@ import CalendarPart from "../components/CalendarPart";
 import Nav from "../components/Nav";
 // import BTN from "../components/BTN";
 
-const CalendarPage = () => {
+const CalendarPage = (props) => {
     return (
         <>
             <Nav showBg={true} isLoggedIn={true} />
@@ -18,7 +18,7 @@ const CalendarPage = () => {
                     </p>
                     <BTN text={"Join Now"} />
                 </div> */}
-                <CalendarPart />
+                <CalendarPart weatherData={props.weatherData} />
             </section>
         </>
     );

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Home from "./views/Home";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import LoginPage from "./views/LoginPage";
@@ -15,8 +15,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 function App() {
-    const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API;
-
     // const gapi = window.gapi;
     // console.log(gapi);
     // const CLIENT_ID =
@@ -61,44 +59,36 @@ function App() {
     //     });
     //
 
-    // var [lat, setLat] = useState(null);
-    // var [lng, setLng] = useState(null);
-    // var [status, setStatus] = useState(null);
-
+    const [weatherData, setWeatherData] = useState(undefined);
     useEffect(() => {
-        const key = WEATHER_API_KEY;
-        const getWeatherInfo = (locationKey) => {
-            console.log(locationKey, "location keyyy");
-            axios
-                .get(
+        const key = process.env.REACT_APP_WEATHER_API;
+        const getWeatherInfo = async (locationKey) => {
+            console.log(locationKey, "location key");
+            try {
+                const res = await axios.get(
                     `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${key}`
-                )
-                .then((e) => {
-                    console.log(e, "weather info");
-                })
-                .catch((e) => {
-                    console.log(e, "weather error");
-                });
+                );
+                setWeatherData(res.data);
+            } catch (e) {
+                console.log("Error in weather info function");
+                console.log(e);
+            }
         };
-
-        const getLocationKey = (lat, lng) => {
-            console.log(lat, lng);
-            axios
-                .get(
-                    `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${WEATHER_API_KEY}&q=${lat}%2C${lng}`
-                )
-                .then((e) => {
-                    getWeatherInfo(e.data.Key);
-                })
-                .catch((e) => {
-                    console.log("key_finder");
-                    console.log(e);
-                });
+        const getLocationKey = async (lat, lng) => {
+            console.log(lat, lng, "latitude and longitude");
+            try {
+                const res = await axios.get(
+                    `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${key}&q=${lat}%2C${lng}`
+                );
+                getWeatherInfo(res.data.Key);
+            } catch (e) {
+                console.log("Error in location key finder");
+                console.log(e);
+            }
         };
-
         const getLocation = () => {
             if (!navigator.geolocation) {
-                // setStatus("Geolocation is not supported by your browser");
+                console.log("Geolocation is not supported by your browser");
             } else {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
@@ -107,14 +97,17 @@ function App() {
                             position.coords.longitude
                         );
                     },
-                    () => {
-                        // setStatus("Unable to retrieve your location");
+                    (error) => {
+                        console.log(error);
+                        alert(
+                            "Give Location Permision and reload the site to access weather information in calander."
+                        );
                     }
                 );
             }
         };
         getLocation();
-    }, [WEATHER_API_KEY]);
+    }, []);
 
     const navigate = useNavigate();
     const navigateToRegister = () => {
@@ -165,7 +158,10 @@ function App() {
                         element={<MeetDetails />}
                     />
                     <Route path='/createnewmeet' element={<CreateNewMeet />} />
-                    <Route path='/calendarpage' element={<CalendarPage />} />
+                    <Route
+                        path='/calendarpage'
+                        element={<CalendarPage weatherData={weatherData} />}
+                    />
                     <Route path='/historypage' element={<HistoryPage />} />
                 </Routes>
             </pathContext.Provider>

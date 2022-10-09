@@ -4,7 +4,7 @@ import TodayInfo from "./TodayInfo";
 
 import month from "../data/month.json";
 
-const CalendarPart = () => {
+const CalendarPart = (props) => {
     const [value, setValue] = useState(new Date());
     const [currentMonth, setCurrentMonth] = useState(value.getMonth());
 
@@ -15,6 +15,7 @@ const CalendarPart = () => {
 
         setCurrentMonth(month[label]);
     };
+
     return (
         <>
             <div className='flex justify-evenly items-center'>
@@ -49,7 +50,18 @@ const CalendarPart = () => {
                         " " +
                         value.getFullYear()}
                 </p>
-                <TodayInfo />
+                <TodayInfo
+                    date={
+                        value.getFullYear() +
+                        "-" +
+                        (value.getMonth() + 1) +
+                        "-" +
+                        (value.getDate() < 10
+                            ? "0" + value.getDate()
+                            : value.getDate())
+                    }
+                    weatherData={props.weatherData}
+                />
             </div>
         </>
     );
