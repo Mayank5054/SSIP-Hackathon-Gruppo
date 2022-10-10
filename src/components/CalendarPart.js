@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
-import Heading from "./Heading";
 import TodayInfo from "./TodayInfo";
-import allMeetings from "../data/allMeetings.json";
 
 import month from "../data/month.json";
 
-const CalendarPart = () => {
+const CalendarPart = (props) => {
     const [value, setValue] = useState(new Date());
     const [currentMonth, setCurrentMonth] = useState(value.getMonth());
 
@@ -17,13 +15,14 @@ const CalendarPart = () => {
 
         setCurrentMonth(month[label]);
     };
+
     return (
         <>
             <div className='flex justify-evenly items-center'>
                 <div className='text-center w-2/5'>
-                    <Heading
-                        text={month[(parseInt(currentMonth) - 1 + 12) % 12]}
-                    />
+                    <h1 className='text-3xl text-secondary-800'>
+                        {month[(parseInt(currentMonth) - 1 + 12) % 12]}
+                    </h1>
                     <p className='text-linkColor'>7 meetings attended</p>
                 </div>
                 <div className='w-1/5'>
@@ -34,7 +33,10 @@ const CalendarPart = () => {
                     />
                 </div>
                 <div className='text-center w-2/5'>
-                    <Heading text={month[(parseInt(currentMonth) + 1) % 12]} />
+                    <h1 className='text-3xl text-secondary-800'>
+                        {month[(parseInt(currentMonth) + 1) % 12]}
+                    </h1>
+
                     <p className='text-linkColor'>
                         14 meets in {month[(parseInt(currentMonth) + 1) % 12]}
                     </p>
@@ -48,7 +50,18 @@ const CalendarPart = () => {
                         " " +
                         value.getFullYear()}
                 </p>
-                <TodayInfo />
+                <TodayInfo
+                    date={
+                        value.getFullYear() +
+                        "-" +
+                        (value.getMonth() + 1) +
+                        "-" +
+                        (value.getDate() < 10
+                            ? "0" + value.getDate()
+                            : value.getDate())
+                    }
+                    weatherData={props.weatherData}
+                />
             </div>
         </>
     );

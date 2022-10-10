@@ -7,7 +7,8 @@ function DropDownMenu(props){
             className={props.className}
             value={props.value}
             required
-            onChange={props.handleChange}>
+            onChange={props.handleChange}
+            name={props.name}>
             <option>{props.text}</option>
             <option>1</option>
             <option>2</option>
