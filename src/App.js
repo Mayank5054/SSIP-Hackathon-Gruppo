@@ -32,7 +32,7 @@ function App() {
         plugin_name:'Grouppo'
         });
         gapi.client.load('calendar','v3',()=>{
-          console.log("bam!");
+          console.log("calendar loaded!");
         })
         gapi.auth2.getAuthInstance().signIn().then((e)=>{
             console.log("logged in");console.log(e);
