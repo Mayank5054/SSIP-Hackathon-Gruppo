@@ -28,7 +28,7 @@ function App() {
         apiKey:API_KEY,
         clientId:CLIENT_ID,
         discoveryDocs:DISCOVERY_DOC,
-        scope:"profile email",
+        scope:SCOPES,
         plugin_name:'Grouppo'
         });
         gapi.client.load('calendar','v3',()=>{

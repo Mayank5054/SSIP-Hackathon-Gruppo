@@ -1,0 +1,194 @@
+{
+    "data": {
+        "Headline": {
+            "EffectiveDate": "2022-10-10T07:00:00+05:30",
+            "EffectiveEpochDate": 1665365400,
+            "Severity": 7,
+            "Text": "Very warm from Monday to Friday",
+            "Category": "heat",
+            "EndDate": "2022-10-14T19:00:00+05:30",
+            "EndEpochDate": 1665754200,
+            "MobileLink": "http://www.accuweather.com/en/in/adalaj/192711/daily-weather-forecast/192711?lang=en-us",
+            "Link": "http://www.accuweather.com/en/in/adalaj/192711/daily-weather-forecast/192711?lang=en-us"
+        },
+        "DailyForecasts": [
+            {
+                "Date": "2022-10-08T07:00:00+05:30",
+                "EpochDate": 1665192600,
+                "Temperature": {
+                    "Minimum": {
+                        "Value": 76,
+                        "Unit": "F",
+                        "UnitType": 18
+                    },
+                    "Maximum": {
+                        "Value": 89,
+                        "Unit": "F",
+                        "UnitType": 18
+                    }
+                },
+                "Day": {
+                    "Icon": 17,
+                    "IconPhrase": "Partly sunny w/ t-storms",
+                    "HasPrecipitation": true,
+                    "PrecipitationType": "Rain",
+                    "PrecipitationIntensity": "Light"
+                },
+                "Night": {
+                    "Icon": 35,
+                    "IconPhrase": "Partly cloudy",
+                    "HasPrecipitation": false
+                },
+                "Sources": ["AccuWeather"],
+                "MobileLink": "http://www.accuweather.com/en/in/adalaj/192711/daily-weather-forecast/192711?day=1&lang=en-us",
+                "Link": "http://www.accuweather.com/en/in/adalaj/192711/daily-weather-forecast/192711?day=1&lang=en-us"
+            },
+            {
+                "Date": "2022-10-09T07:00:00+05:30",
+                "EpochDate": 1665279000,
+                "Temperature": {
+                    "Minimum": {
+                        "Value": 77,
+                        "Unit": "F",
+                        "UnitType": 18
+                    },
+                    "Maximum": {
+                        "Value": 94,
+                        "Unit": "F",
+                        "UnitType": 18
+                    }
+                },
+                "Day": {
+                    "Icon": 3,
+                    "IconPhrase": "Partly sunny",
+                    "HasPrecipitation": false
+                },
+                "Night": {
+                    "Icon": 36,
+                    "IconPhrase": "Intermittent clouds",
+                    "HasPrecipitation": false
+                },
+                "Sources": ["AccuWeather"],
+                "MobileLink": "http://www.accuweather.com/en/in/adalaj/192711/daily-weather-forecast/192711?day=2&lang=en-us",
+                "Link": "http://www.accuweather.com/en/in/adalaj/192711/daily-weather-forecast/192711?day=2&lang=en-us"
+            },
+            {
+                "Date": "2022-10-10T07:00:00+05:30",
+                "EpochDate": 1665365400,
+                "Temperature": {
+                    "Minimum": {
+                        "Value": 75,
+                        "Unit": "F",
+                        "UnitType": 18
+                    },
+                    "Maximum": {
+                        "Value": 93,
+                        "Unit": "F",
+                        "UnitType": 18
+                    }
+                },
+                "Day": {
+                    "Icon": 4,
+                    "IconPhrase": "Intermittent clouds",
+                    "HasPrecipitation": false
+                },
+                "Night": {
+                    "Icon": 38,
+                    "IconPhrase": "Mostly cloudy",
+                    "HasPrecipitation": false
+                },
+                "Sources": ["AccuWeather"],
+                "MobileLink": "http://www.accuweather.com/en/in/adalaj/192711/daily-weather-forecast/192711?day=3&lang=en-us",
+                "Link": "http://www.accuweather.com/en/in/adalaj/192711/daily-weather-forecast/192711?day=3&lang=en-us"
+            },
+            {
+                "Date": "2022-10-11T07:00:00+05:30",
+                "EpochDate": 1665451800,
+                "Temperature": {
+                    "Minimum": {
+                        "Value": 73,
+                        "Unit": "F",
+                        "UnitType": 18
+                    },
+                    "Maximum": {
+                        "Value": 96,
+                        "Unit": "F",
+                        "UnitType": 18
+                    }
+                },
+                "Day": {
+                    "Icon": 4,
+                    "IconPhrase": "Intermittent clouds",
+                    "HasPrecipitation": false
+                },
+                "Night": {
+                    "Icon": 33,
+                    "IconPhrase": "Clear",
+                    "HasPrecipitation": false
+                },
+                "Sources": ["AccuWeather"],
+                "MobileLink": "http://www.accuweather.com/en/in/adalaj/192711/daily-weather-forecast/192711?day=4&lang=en-us",
+                "Link": "http://www.accuweather.com/en/in/adalaj/192711/daily-weather-forecast/192711?day=4&lang=en-us"
+            },
+            {
+                "Date": "2022-10-12T07:00:00+05:30",
+                "EpochDate": 1665538200,
+                "Temperature": {
+                    "Minimum": {
+                        "Value": 71,
+                        "Unit": "F",
+                        "UnitType": 18
+                    },
+                    "Maximum": {
+                        "Value": 96,
+                        "Unit": "F",
+                        "UnitType": 18
+                    }
+                },
+                "Day": {
+                    "Icon": 2,
+                    "IconPhrase": "Mostly sunny",
+                    "HasPrecipitation": false
+                },
+                "Night": {
+                    "Icon": 33,
+                    "IconPhrase": "Clear",
+                    "HasPrecipitation": false
+                },
+                "Sources": ["AccuWeather"],
+                "MobileLink": "http://www.accuweather.com/en/in/adalaj/192711/daily-weather-forecast/192711?day=5&lang=en-us",
+                "Link": "http://www.accuweather.com/en/in/adalaj/192711/daily-weather-forecast/192711?day=5&lang=en-us"
+            }
+        ]
+    },
+    "status": 200,
+    "statusText": "OK",
+    "headers": {
+        "cache-control": "public, max-age=61",
+        "content-type": "application/json; charset=utf-8",
+        "expires": "Sat, 08 Oct 2022 12:32:50 GMT"
+    },
+    "config": {
+        "transitional": {
+            "silentJSONParsing": true,
+            "forcedJSONParsing": true,
+            "clarifyTimeoutError": false
+        },
+        "transformRequest": [null],
+        "transformResponse": [null],
+        "timeout": 0,
+        "xsrfCookieName": "XSRF-TOKEN",
+        "xsrfHeaderName": "X-XSRF-TOKEN",
+        "maxContentLength": -1,
+        "maxBodyLength": -1,
+        "env": {
+            "FormData": null
+        },
+        "headers": {
+            "Accept": "application/json, text/plain, */*"
+        },
+        "method": "get",
+        "url": "http://dataservice.accuweather.com/forecasts/v1/daily/5day/192711?apikey=CxPRtzC63IkuZEcYYr5aZr8wfGF81ARd"
+    },
+    "request": {}
+}
