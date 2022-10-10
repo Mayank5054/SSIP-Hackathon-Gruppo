@@ -50,49 +50,7 @@ function App() {
   })
  
     }
-    // const gapi = window.gapi;
-    // console.log(gapi);
-    // const CLIENT_ID =
-    //     "934057497734-2k0sp365v94u0u08ta8mv9b4qodkoal6.apps.googleusercontent.com";
-    // const API_KEY = "AIzaSyBI57Lt2FHhIiXvRZunhEvuqZhmgZ0lHbk";
-    // const DISCOVERY_DOC =
-    //     "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest";
-    // const SCOPES = "https://www.googleapis.com/auth/calendar.events";
-    // const handleCal = () => {
-    //     gapi.load("client:auth2", () => {
-    //         console.log("client loaded");
-    //         gapi.client.init({
-    //             apiKey: API_KEY,
-    //             clientId: CLIENT_ID,
-    //             discoveryDocs: DISCOVERY_DOC,
-    //             scope: SCOPES,
-    //             plugin_name: "Grouppo",
-    //         });
-    //         gapi.client.load("calendar", "v3", () => {
-    //             console.log("bam!");
-    //         });
-    //         gapi.auth2
-    //             .getAuthInstance()
-    //             .signIn()
-    //             .then((e) => {
-    //                 console.log("logged in");
-    //                 console.log(e);
-    //                 const data = {
-    //                     summary: "hello world",
-    //                     start: { date: "2022-10-07" },
-    //                     end: { date: "2022-10-11" },
-    //                 };
-    //                 const req = gapi.client.calendar.events.insert({
-    //                     calendarId: "primary",
-    //                     resource: data,
-    //                 });
-    //                 req.execute((e) => {
-    //                     console.log("request sent");
-    //                     console.log(e);
-    //                 });
-    //             });
-    //     });
-    //
+    
 
     const [weatherData, setWeatherData] = useState(undefined);
     useEffect(() => {
@@ -200,7 +158,7 @@ function App() {
                     <Route path='/historypage' element={<HistoryPage />} />
                 </Routes>
             </pathContext.Provider>
-            {/* <button onClick={handleCal}>click to authorized calendar</button> */}
+            <button onClick={handleCal}>click to authorized calendar</button>
         </LocalizationProvider>
     );
 }
