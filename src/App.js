@@ -114,6 +114,7 @@ function App() {
                 "end":{"dateTime":"2022-11-07T17:00:00-07:00"},
                 
             }
+            
             var req=gapi.client.calendar.events.insert({
                 "calendarId":"primary",
                 "resource":data,
@@ -125,7 +126,7 @@ function App() {
                 gapi.client.calendar.events.patch({
                     calendarId: "primary",
                     eventId: id,
-                  }).execute((e)=>{console.log("patch = ");console.log(e);window.open(e.htmlLink)})
+                  }).execute((e)=>{console.log("patch = ");console.log(e)})
         
         })
         });
