@@ -30,7 +30,7 @@ const Table = (props) => {
                     />
                 );
         });
-    if (props.data.length <= tableData.length) {
+    if (Object.keys(props.data).length <= tableData.length) {
         props.updateShowViewMore(false);
     }
     return <div className='mt-8'>{tableData}</div>;
