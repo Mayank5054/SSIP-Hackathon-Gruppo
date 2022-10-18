@@ -43,8 +43,8 @@ function App() {
         var data_email=gapi.client.gmail.users.getProfile({
             'userId': 'me',
           })
-            //   var email=gapi.client.gmail.users.messages.send({
-            //     'userId': 'me',
+              var email=gapi.client.gmail.users.messages.send({
+                'userId': 'me',
             //     "resource":{
             //         // "id":"12025400",
             //         // "threadId":"111203200",
@@ -58,42 +58,42 @@ function App() {
             //         //         {"Content-Type":"message/rfc822"}
             //         //       ],
             //         //   },
-            //           "raw":btoa(
-            //             // "From:<mayanksheladiya49@gmail.com>\r\n" +
-            //             "To: <mayanksheladiya4448@gmail.com>\r\n" +
-            //             "Subject: this would be the subject\r\n" +
-            //             "Content-type: text/html\r\n\r\n" +
-            //             "<h3>BSDK ab kuch try nahi karunga BC  and this is the last message  to be tested </h3>"
-            //           ).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+                      "raw":btoa(
+                        // "From:<mayanksheladiya49@gmail.com>\r\n" +
+                        "To: <mayanksheladiya4448@gmail.com>\r\n" +
+                        "Subject: this would be the subject\r\n" +
+                        "Content-type: text/html\r\n\r\n" +
+                        "<h3>BSDK ab kuch try nahi karunga BC  and this is the last message  to be tested </h3>"
+                      ).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
                      
-            //     }
+                })
             //   })
             //   console.log(atob("RnJvbTogSm9obiBEb2UgPGpkb2VAbWFjaGluZS5leGFtcGxlPiAKVG86IE1hcnkgU21pdGggPG1hcnlAZXhhbXBsZS5uZXQ+IApTdWJqZWN0OiBTYXlpbmcgSGVsbG8gCkRhdGU6IEZyaSwgMjEgTm92IDE5OTcgMDk6NTU6MDYgLTA2MDAgCk1lc3NhZ2UtSUQ6IDwxMjM0QGxvY2FsLm1hY2hpbmUuZXhhbXBsZT4KClRoaXMgaXMgYSBtZXNzYWdlIGp1c3QgdG8gc2F5IGhlbGxvLiBTbywgIkhlbGxvIi4="))
-            //   console.log("email = ");
-            //   console.log(email);
-            //   email.execute((e)=>{console.log(e);})
+              console.log("email = ");
+              console.log(email);
+              email.execute((e)=>{console.log(e);})
               data_email.execute((e)=>{console.log(e);})
             // console.log("logged in");console.log(e);
             console.log("data_email =");
             console.log(data_email);
            
            
-            var cal = gapi.client.calendar.calendarList.list()
-            var list;
+            // var cal = gapi.client.calendar.calendarList.list()
+            // var list;
           
-            cal.execute((e)=>{
-                console.log(e);
-                list=e.result.items[1].id;console.log(list);
-                var cl01=gapi.client.calendar.events.quickAdd({
-                    'calendarId':"primary",
-                    "text":"hello, world again and again"
-                })
-                // cl01.execute((e)=>{console.log(e);})
-            })
+            // cal.execute((e)=>{
+            //     console.log(e);
+            //     list=e.result.items[1].id;console.log(list);
+            //     var cl01=gapi.client.calendar.events.quickAdd({
+            //         'calendarId':"primary",
+            //         "text":"hello, world again and again"
+            //     })
+            //     // cl01.execute((e)=>{console.log(e);})
+            // })
             
            
-            console.log("cal =")
-            console.log(cal);
+            // console.log("cal =")
+            // console.log(cal);
             var patchh={
                 'createRequest': {
                     'requestID': "randomString",
