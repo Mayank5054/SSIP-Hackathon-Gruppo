@@ -1,8 +1,13 @@
 import React from "react";
+import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 
 function People(props) {
+    console.log(props.isSelected)
+    const SELECTED_STYLES = {
+        backgroundColor: props.isSelected ? "#FFC700" : "#EFC6C6"
+    }
     return (
-        <div className='flex text-primary-900 p-4 my-3 bg-primary-200 rounded w-full'>
+        <div onClick={() => props.handleToggle(props.id)}  className='flex text-primary-900 p-4 my-3 bg-primary-200 rounded w-full' style={SELECTED_STYLES}>
             <img
                 className='w-12 rounded-full mr-5'
                 src={props.imgUrl}
@@ -12,6 +17,10 @@ function People(props) {
                 <h3 className='text-xl'>{props.name}</h3>
                 <p className='text-small'>{props.role}</p>
             </div>
+            <div>
+                {props.isSelected && <DoneOutlinedIcon />}
+            </div>
+            
         </div>
     );
 }

@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import Nav from "../components/Nav";
 import Heading from "../components/Heading";
 import InputBox from "../components/InputBox";
-import DropDownMenu from "../components/DropDownMenu";
 import People from "../components/People";
 import PeopleData from "../data/peopleData.json";
 import DatePickerBox from "../components/DatePickerBox";
 import TimePickerBox from "../components/TimePickerBox";
 import LibraryAddOutlinedIcon from "@mui/icons-material/LibraryAddOutlined";
-
+import PeoplePopup from './../components/PeoplePopup';
+import { Scrollbars } from 'react-custom-scrollbars';
+import MultiSelectDropdown from "../components/MultiSelectDropdown";
 function CreateNewMeet() {
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(new Date());
@@ -17,19 +18,20 @@ function CreateNewMeet() {
     const [formData, setFormData] = useState({
         title: "",
         venue: "",
-        department: "",
         date: date,
         time: time,
     });
 
+    //handleChange function for formData
     function handleChange(event) {
         const { name, value } = event.target;
         setFormData((prevFormData) => ({
             ...prevFormData,
             [name]: value,
         }));
-    }
+    } 
 
+    //handle change function for date and time 
     function setDateFun(e) {
         setDate(e);
     }
@@ -38,22 +40,85 @@ function CreateNewMeet() {
     }
     useEffect(() => {
         formData.time = time;
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [time]);
 
     useEffect(() => {
         formData.date = date;
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [date]);
+
+
+
+    const [dept, setDept] = useState([]);
+
+    //handle change function for dept 
+    const handleDeptFunc = (event) => {
+        const {
+          target: { value },
+        } = event;
+        setDept(
+          // On autofill we get a stringified value.
+          typeof value === 'string' ? value.split(',') : value,
+        );
+    }
+
+    //isOpen for popup menu state
+    const [isOpen , setIsOpen] = useState(false);
+
+    const [PeopleDataByDept, setPeopleDataByDept] = useState(filterPeopleData()); 
+    //function to filter people (select people by selected department name)
+    function filterPeopleData(){
+        return PeopleData.filter(people => dept.includes(people.department))
+    }
+
+
+    //for selecte or unselecte people
+    const [toggleSelect, setToggleSelect] = useState(newToggleSelectData());
+    //addind isSelecte for every object of people filtered by department name
+    function newToggleSelectData(){
+        const data = [];
+        
+        PeopleDataByDept.map((people) => {
+            data.push({
+                ...people,
+                isSelecte: false
+            })
+        })
+        return data; 
+    } 
+
+    //handle change function for toggleSelect
+    function handleToggle(id){
+        setToggleSelect(
+            toggleSelect.map(data => {
+                return data.id === id ? {...data, isSelecte: !data.isSelecte} : data
+            })) 
+        
+        console.log("Toggle button clicked");
+    }
+
+    //when dept arr change 
+    useEffect(() => {
+        setPeopleDataByDept(filterPeopleData());
+    }, [dept]) 
+
+   //when PeopleDataByDept arr change
+    useEffect(() => {
+        setToggleSelect(newToggleSelectData());
+    }, [PeopleDataByDept]) 
+
+
+    //handle submit function (final submit function) 
+    //integrate Backend in this function
     const handleSubmit = async (e) => {
         e.preventDefault();
         setFormData({
             title: "",
             venue: "",
-            department: "",
             date: new Date(),
             time: new Date(),
         });
+        setDept([]);
+
     };
 
     return (
@@ -94,30 +159,33 @@ function CreateNewMeet() {
                                 placeHolder='Venue'
                                 handleChange={handleChange}
                             />
-                            <DropDownMenu
-                                className='my-2 w-full rounded p-4 text-primary-900 font-medium outline-primary-900'
-                                value={formData.department}
-                                name='department'
-                                text='Add Department'
-                                handleChange={handleChange}
-                            />
+                            
+                            <MultiSelectDropdown text="Add Department" handleChange={handleDeptFunc} value={dept} options={['ABc', 'XYZ',]}/>
                         </div>
-                        {console.log(formData)}
+                       
                         <div className='col-start-8 col-span-4 bg-primary-900/50 shadow-mine p-4 rounded'>
-                            <a
-                                href='http://localhost:3000'
-                                className='text-primary-200 text-2xl items-center'>
-                                <LibraryAddOutlinedIcon /> Click to invite
-                                people
-                            </a>
-                            {Object.keys(PeopleData).map((id) => (
-                                <People
+                            <div
+                                className='text-primary-200 text-2xl items-center'
+                                onClick={() => setIsOpen(true)}>
+                                <LibraryAddOutlinedIcon /> 
+                                Click to invite people
+                            </div>
+                            
+                            <PeoplePopup open={isOpen} onClose={() => setIsOpen(false)} onToggle={handleToggle} toggleSelectArr={toggleSelect}/>
+                          
+                            <Scrollbars style={{ width: '100%', height: 300 }}>
+                                {toggleSelect.map(({id, img, name, role, isSelecte}) => (
+                                    isSelecte && 
+                                    <People
                                     key={id}
-                                    imgUrl={PeopleData[id].img}
-                                    name={PeopleData[id].name}
-                                    role={PeopleData[id].role}
-                                />
-                            ))}
+                                    id={id}
+                                    imgUrl={img}
+                                    name={name}
+                                    role={role}
+                                     />
+                                ))}
+                                
+                            </Scrollbars>
                         </div>
                         <button className='col-start-5 col-span-5 text-primary-900 bg-linkColor z-40 rounded-md mt-6 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine'>
                             Schedule A New Meet
