@@ -10,9 +10,9 @@ const TableRowFourC = (props) => {
         ctx.navigateToMeetsDetail(data);
     };
     return (
-        <div className='grid grid-cols-12 w-full h-14 text-secondary-700 justify-center items-center pl-6 my-4 rounded-lg shadow-table'>
+        <div className='grid grid-cols-12 gap-1 w-full h-14 text-secondary-700 justify-center items-center pl-6 mb-4 rounded-lg shadow-table'>
             <div>{props.id + "."}</div>
-            <div className='col-span-7'>
+            <div className='col-span-7 whitespace-nowrap overflow-hidden text-ellipsis'>
                 <span
                     className='cursor-pointer underline'
                     onClick={() => handleClick(props.id)}>
@@ -21,7 +21,7 @@ const TableRowFourC = (props) => {
             </div>
             <div className='col-span-2'>{props.time}</div>
             {props.join === "Join Here" ? (
-                <div className='col-span-2'>
+                <div className='col-span-2 overflow-hidden text-ellipsis'>
                     <a
                         href='https://meet.google.com/'
                         target='_blank'
@@ -30,7 +30,9 @@ const TableRowFourC = (props) => {
                     </a>
                 </div>
             ) : (
-                <div className='col-span-2'>{props.join}</div>
+                <div className='col-span-2 whitespace-nowrap overflow-hidden text-ellipsis'>
+                    {props.join}
+                </div>
             )}
         </div>
     );

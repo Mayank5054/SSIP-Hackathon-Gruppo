@@ -3,14 +3,13 @@ import hostedMeetings from "../data/hostedMeetings.json";
 import BTNLight from "../components/BTNLight";
 
 const MeetingHostedCard = (props) => {
-    console.log(props.data);
     return (
         <div className='bg-secondary-600 p-4 rounded-lg'>
             <div className='flex'>
                 <img
                     className='h-14 w-14 rounded-full mr-4'
                     src={hostedMeetings["1"].img}
-                    alt='profile picture'
+                    alt='profile'
                 />
                 <div className='w-full'>
                     <p className='text-xl text-secondary-700 w-4/5 overflow-hidden whitespace-nowrap text-ellipsis'>
@@ -39,15 +38,16 @@ const MeetingHostedCard = (props) => {
                     return (
                         <img
                             key={key}
-                            className={`relative h-[25px] w-[25px] right-${key} rounded-full`}
+                            style={{ right: `${key * 5}px` }}
+                            className={`relative h-[25px] w-[25px] rounded-full`}
                             src={props.data.attendees[key]}
-                            alt=''
+                            alt='attendees'
                         />
                     );
                 })}
             </div>
             <div className='flex justify-center items-center mt-1'>
-                <BTNLight text='View Details' />
+                <BTNLight text='Update Details' />
             </div>
         </div>
     );

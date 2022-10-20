@@ -253,7 +253,7 @@ function App() {
                     <Route path='/' element={<Home />} />
                     <Route path='/meets' element={<Meets />} />
                     <Route
-                        path='/meetdetails/ :meetid'
+                        path='/meetdetails/:meetid'
                         element={<MeetDetails />}
                     />
                     <Route path='/createnewmeet' element={<CreateNewMeet />} />
@@ -265,7 +265,7 @@ function App() {
                     <Route path='/dashboard' element={<DashBoard />} />
                 </Routes>
             </pathContext.Provider>
-            <button onClick={handleCal}>click to authorized calendar</button>
+            {/* <button onClick={handleCal}>click to authorized calendar</button> */}
         </LocalizationProvider>
     );
 }

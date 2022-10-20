@@ -8,7 +8,7 @@ function People(props) {
     return (
         <div
             onClick={() => props.handleToggle(props.id)}
-            className='flex text-primary-900 p-4 my-3 bg-primary-200 rounded w-full'
+            className='flex text-primary-900 p-4 mb-3 bg-primary-200 rounded w-full'
             style={SELECTED_STYLES}>
             <img
                 className='w-12 rounded-full mr-5'

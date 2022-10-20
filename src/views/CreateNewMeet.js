@@ -8,7 +8,6 @@ import DatePickerBox from "../components/DatePickerBox";
 import TimePickerBox from "../components/TimePickerBox";
 import LibraryAddOutlinedIcon from "@mui/icons-material/LibraryAddOutlined";
 import PeoplePopup from "./../components/PeoplePopup";
-import { Scrollbars } from "react-custom-scrollbars";
 import MultiSelectDropdown from "../components/MultiSelectDropdown";
 function CreateNewMeet() {
     //in DB extract date as time.toLocaleDateString() (because while selecting date it will select current time by default)
@@ -175,7 +174,7 @@ function CreateNewMeet() {
 
                         <div className='col-start-8 col-span-4 bg-primary-900/50 shadow-mine p-4 rounded'>
                             <div
-                                className='text-primary-200 text-2xl items-center'
+                                className='text-primary-200 text-2xl items-center mb-3 cursor-pointer'
                                 onClick={() => setIsOpen(true)}>
                                 <LibraryAddOutlinedIcon />
                                 Click to invite people
@@ -188,7 +187,9 @@ function CreateNewMeet() {
                                 toggleSelectArr={toggleSelect}
                             />
 
-                            <Scrollbars style={{ width: "100%", height: 300 }}>
+                            {/* <Scrollbars style={{ width: "100%", height: 300 }}> */}
+
+                            <div className='w-full h-[300px] overflow-y-scroll pr-2'>
                                 {toggleSelect.map(
                                     ({ id, img, name, role, isSelecte }) =>
                                         isSelecte && (
@@ -201,7 +202,8 @@ function CreateNewMeet() {
                                             />
                                         )
                                 )}
-                            </Scrollbars>
+                            </div>
+                            {/* </Scrollbars> */}
                         </div>
                         <button className='col-start-5 col-span-5 text-primary-900 bg-linkColor z-40 rounded-md mt-6 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine'>
                             Schedule A New Meet
