@@ -44,7 +44,7 @@ const Register = (props) => {
         //check if both password is same or not in back-end
        
         axios.post("http://localhost/php_practise/signup.php",{
-              name:formData.user,
+              name:formData.userName,
               email:formData.email,
               password:formData.pwd,
               confirm_password:formData.cPwd
