@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import People from "./People";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
@@ -25,15 +25,22 @@ const OVERLAY_STYLES = {
 
 const PeoplePopup = ({ open, onClose, onToggle, toggleSelectArr }) => {
     if (!open) return null;
-
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [searchTerm, setSearchTerm] = useState("");
     return (
         <>
             <div style={OVERLAY_STYLES}>
                 <div style={Popup_STYLES} className='flex flex-col items-end'>
                     <CloseOutlinedIcon onClick={onClose} />
                     {/* <Scrollbars style={{ width: '100%', height: 500 }}>  */}
+                    <input className="my-3 p-3 w-full border-solid border-2 border-secondary-600 rounded" type="text" placeholder="Search..." value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)}></input>
                     <div className='w-full h-[500px] overflow-y-scroll pr-2'>
-                        {toggleSelectArr.map(
+                        {toggleSelectArr.filter(val => {
+                            if(searchTerm === "")
+                            return val;
+                            else if(val.name.toLowerCase().includes(searchTerm.toLowerCase()))
+                            return val;
+                        }).map(
                             ({ id, img, name, role, isSelecte }) => (
                                 <People
                                     key={id}
