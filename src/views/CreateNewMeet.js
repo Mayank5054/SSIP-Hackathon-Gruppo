@@ -110,7 +110,7 @@ function CreateNewMeet() {
     //integrate Backend in this function
     const [selectedPeople, setSelectedPeople] = useState([]);
     const handleSubmit = async (e) => {
-        console.log(formData);
+        console.log(formData, mode);
         e.preventDefault();
         setSelectedPeople(
             toggleSelect.filter((person) => {
@@ -123,6 +123,7 @@ function CreateNewMeet() {
             date: new Date(),
             time: new Date(),
         });
+        setMode("offline");
         // setDept([]);
         console.log(selectedPeople);
     };
