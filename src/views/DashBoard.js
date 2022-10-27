@@ -10,7 +10,7 @@ const DashBoard = () => {
     const ctx = useContext(pathContext);
     const [heights, setHeights] = useState([
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    ]);
+    ]); 
     const [maxAttended, setMaxAttended] = useState(0);
     const currentMonth = new Date().getMonth();
     useEffect(() => {

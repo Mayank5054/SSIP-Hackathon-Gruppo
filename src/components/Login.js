@@ -34,10 +34,6 @@ const Login = (props) => {
 
     const HandleSubmit = async (e) => {
         e.preventDefault();
-        //backend integration here
-        //according to statuscode of backend res error msg will change
-        //currently it will show success for any value of email and passward
-
         // handle01.php is run on localhost for our development after we post it on somewhere which can execute php
         // react js compiler doesnt execute php that's the matter .
         // so put handle01.php on c://xampp/htdocs

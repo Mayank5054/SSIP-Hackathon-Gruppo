@@ -30,7 +30,8 @@ const PeoplePopup = ({ open, onClose, onToggle, toggleSelectArr }) => {
     };
 
     if (!open) return null;
-
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [searchTerm, setSearchTerm] = useState("");
     return (
         <>
             <div style={OVERLAY_STYLES}>
@@ -48,6 +49,14 @@ const PeoplePopup = ({ open, onClose, onToggle, toggleSelectArr }) => {
                         }}
                     />
                     {/* <Scrollbars style={{ width: '100%', height: 500 }}>  */}
+                    <input
+                        className='my-3 p-3 w-full border-solid border-2 border-secondary-600 rounded'
+                        type='text'
+                        placeholder='Search...'
+                        value={searchTerm}
+                        onChange={(event) =>
+                            setSearchTerm(event.target.value)
+                        }></input>
                     <div className='w-full h-[500px] overflow-y-scroll pr-2'>
                         {toggleSelectArr
                             .filter((people) => {

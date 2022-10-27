@@ -1,4 +1,5 @@
 <?php
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 class validation{
     function check($em,$pw){
       $em_answer=preg_match("/^([a-zA-Z]+[0-9]*[_.-]?[a-zA-Z0-9]{1,})@([a-z]+[-]?[a-z]+.[a-z]{2,})$/",$em,$match);
@@ -15,16 +16,23 @@ class validation{
       }
     }
     function existence($em,$pw){
-           $db=new mysqli("localhost","SSIP","SSIP","ssip",3306);
+           $db=new mysqli("localhost","SSIP","SSIP","grouppo",3306);
            if($db)
            {
-               $co=$db->query("select * from user_data where email='" . $em . "' and password='" .$pw . "'");
-               $fetch=$co->fetch_row();
-               if($fetch==null){
+            //    $co=$db->query("select * from signup where email='" . $em . "' and password='" .$pw . "'");
+           
+              
+              $check_exist=$db->query("select * from signup where email='".$em."' and user_password='".$pw."'");
+              $object_of_exist=$check_exist->fetch_assoc();
+               if($object_of_exist==null){
                 return "USER_NOT_EXISTS";
                }
                else{
-                return "UNIQUE_ID";
+                $db->query("use grouppo");
+                $co=$db->query("CALL tableID('" . $em . "','" . $pw . "')");
+                $fetch=$co->fetch_all(1);    
+                $data=json_encode($fetch);
+                return $data;
                }
            }
            else{
@@ -32,6 +40,13 @@ class validation{
            }
            $db->close();
     }
+    function generate_UID($str){
+        $user_name=date("mydhis");
+        $ans=str_split($user_name,strlen($user_name)/2);
+        $user_id=str_shuffle($ans[0].$str.$ans[1]);
+        return $user_id;
+    }
 }
+
 
 ?>

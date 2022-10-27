@@ -25,9 +25,14 @@ if ($password == $conf_pass) {
             $db = new mysqli("localhost", "SSIP", "SSIP", "ssip", 3306);
             if ($db) 
             {
-                $db->query("insert into user_data values('$name','$password','$email')");
+                $userID=$obj->generate_UID($name);
+                $db->query("use grouppo");
+                $db->query("source D:/ssip/ssip_script01.sql");
+                $co=$db->query("CALL createAccount('" . $email . "','" . $password . "','" . $userID ."')");
                 echo "USER_ACCOUNT_CREATED";
+                echo $userID;
                 $db->close();
+
             } 
             else 
             {
