@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import People from "./People";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
@@ -24,6 +24,11 @@ const OVERLAY_STYLES = {
 };
 
 const PeoplePopup = ({ open, onClose, onToggle, toggleSelectArr }) => {
+    const [searchValue, setSearchValue] = useState("");
+    const handleChange = (e) => {
+        setSearchValue(e.target.value);
+    };
+
     if (!open) return null;
 
     return (
@@ -31,10 +36,35 @@ const PeoplePopup = ({ open, onClose, onToggle, toggleSelectArr }) => {
             <div style={OVERLAY_STYLES}>
                 <div style={Popup_STYLES} className='flex flex-col items-end'>
                     <CloseOutlinedIcon onClick={onClose} />
+                    <input
+                        name='searchPeople'
+                        autoComplete='true'
+                        className={`w-full rounded p-4 text-primary-900 border my-3 outline-primary-900 border-primary-900`}
+                        type='text'
+                        value={searchValue}
+                        placeholder='Search people by name or department name'
+                        onChange={(e) => {
+                            handleChange(e);
+                        }}
+                    />
                     {/* <Scrollbars style={{ width: '100%', height: 500 }}>  */}
                     <div className='w-full h-[500px] overflow-y-scroll pr-2'>
-                        {toggleSelectArr.map(
-                            ({ id, img, name, role, isSelecte }) => (
+                        {toggleSelectArr
+                            .filter((people) => {
+                                return (
+                                    people.name
+                                        .toLowerCase()
+                                        .indexOf(
+                                            searchValue.toLocaleLowerCase()
+                                        ) !== -1 ||
+                                    people.department
+                                        .toLowerCase()
+                                        .indexOf(
+                                            searchValue.toLocaleLowerCase()
+                                        ) !== -1
+                                );
+                            })
+                            .map(({ id, img, name, role, isSelecte }) => (
                                 <People
                                     key={id}
                                     id={id}
@@ -44,8 +74,7 @@ const PeoplePopup = ({ open, onClose, onToggle, toggleSelectArr }) => {
                                     handleToggle={onToggle}
                                     isSelected={isSelecte}
                                 />
-                            )
-                        )}
+                            ))}
                     </div>
                     {/* </Scrollbars> */}
                 </div>

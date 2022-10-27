@@ -69,7 +69,7 @@ const AccordionLayout = ({
             </div>
 
             {activeIndex === index && (
-                <div className='grid grid-cols-4 gap-6 rounded-b px-24 pb-4 bg-secondary-600 w-3/4'>
+                <div className='grid grid-cols-4 gap-6 rounded-b px-24 pb-4 bg-secondary-600'>
                     <div>
                         <p className='text-xl text-secondary-900'>Duration</p>
                         <p className='text-secondary-800'>{duration}</p>
