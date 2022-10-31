@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "../components/Nav";
 import Heading from "../components/Heading";
 import InputBox from "../components/InputBox";
@@ -108,15 +108,37 @@ function CreateNewMeet() {
 
     //handle submit function (final submit function)
     //integrate Backend in this function
-    const [selectedPeople, setSelectedPeople] = useState([]);
+    const [finalFormObject, setFinalFormObject] = useState({
+        title: "",
+        venue: "",
+        mode: "offline",
+        date: new Date(),
+        time: new Date(),
+        selectedPeople: [],
+    });
     const handleSubmit = async (e) => {
         console.log(formData, mode);
         e.preventDefault();
-        setSelectedPeople(
-            toggleSelect.filter((person) => {
-                return person.isSelecte;
-            })
-        );
+        const selectedPeople = toggleSelect.filter((person) => {
+            return person.isSelecte;
+        });
+        setFinalFormObject({
+            ...formData,
+            mode,
+            selectedPeople,
+        });
+        // setDept([]);
+    };
+
+    function onChangeMode(event) {
+        setMode(event.target.value);
+        console.log(event.target.value);
+    }
+
+    useEffect(() => {
+        console.log("final object", finalFormObject);
+        // send request here.
+
         setFormData({
             title: "",
             venue: "",
@@ -124,14 +146,7 @@ function CreateNewMeet() {
             time: new Date(),
         });
         setMode("offline");
-        // setDept([]);
-        console.log(selectedPeople);
-    };
-
-    function onChangeMode(event) {
-        setMode(event.target.value);
-        console.log(event.target.value);
-    }
+    }, [finalFormObject]);
 
     return (
         <>
