@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "../components/Nav";
 import Heading from "../components/Heading";
 import InputBox from "../components/InputBox";
@@ -8,7 +8,8 @@ import DatePickerBox from "../components/DatePickerBox";
 import TimePickerBox from "../components/TimePickerBox";
 import LibraryAddOutlinedIcon from "@mui/icons-material/LibraryAddOutlined";
 import PeoplePopup from "./../components/PeoplePopup";
-// import MultiSelectDropdown from "../components/MultiSelectDropdown";
+import MultiSelectDropdown from "../components/MultiSelectDropdown";
+import axios from "axios";
 function CreateNewMeet() {
     //in DB extract date as time.toLocaleDateString() (because while selecting date it will select current time by default)
     //in DB extract time as time.toLocaleTimeString() (because while selecting time it will select current date by default)
@@ -18,7 +19,6 @@ function CreateNewMeet() {
         date: new Date(),
         time: new Date(),
     });
-    const [mode, setMode] = useState("offline");
 
     //handleChange function for formData
     function handleChange(event) {
@@ -58,7 +58,7 @@ function CreateNewMeet() {
 
     //isOpen for popup menu state
     const [isOpen, setIsOpen] = useState(false);
-
+    const [mode,setMode]=useState("offline");
     // const [PeopleDataByDept, setPeopleDataByDept] = useState(
     //     filterPeopleData()
     // );
@@ -109,6 +109,7 @@ function CreateNewMeet() {
     //handle submit function (final submit function)
     //integrate Backend in this function
     const [selectedPeople, setSelectedPeople] = useState([]);
+
     const handleSubmit = async (e) => {
         console.log(formData, mode);
         e.preventDefault();
@@ -117,6 +118,14 @@ function CreateNewMeet() {
                 return person.isSelecte;
             })
         );
+        axios.post("http://localhost/php_practise/createMeet.php",{
+          ...formData,
+          attendees:selectedPeople
+        }).then(
+            (e)=>{
+                console.log(e.data);
+            }
+        )
         setFormData({
             title: "",
             venue: "",
@@ -136,7 +145,7 @@ function CreateNewMeet() {
     return (
         <>
             <Nav showBg={true} isLoggedIn={true} />
-            {/* <div className="bg-[url('./../public/images/style02.png')] bg-no-repeat bg-right bg-fixed w-full h-screen"> */}
+            <div className="bg-[url('./../public/images/style02.png')] bg-no-repeat bg-right bg-fixed w-full h-screen">
             <section className='w-9/10 mx-auto relative mt-28'>
                 <Heading text='Create A New Meet' />
                 <form
@@ -153,55 +162,25 @@ function CreateNewMeet() {
                             required={true}
                         />
 
-                        <DatePickerBox
-                            name='date'
-                            value={formData.date}
-                            handleChange={setDateFun}
-                        />
-                        <TimePickerBox
-                            name='time'
-                            value={formData.time}
-                            handleChange={setTimeFun}
-                        />
+                            <DatePickerBox
+                                name='date'
+                                value={formData.date}
+                                handleChange={setDateFun}
+                            />
+                            <TimePickerBox
+                                name='time'
+                                value={formData.time}
+                                handleChange={setTimeFun}
+                            />
 
-                        <InputBox
-                            className='my-2'
-                            type='text'
-                            name='venue'
-                            value={formData.venue}
-                            placeHolder='Venue'
-                            handleChange={handleChange}
-                        />
-                        <div onChange={onChangeMode}>
-                            <span>
-                                <label
-                                    htmlFor='online'
-                                    className='text-secondary-800'>
-                                    <input
-                                        className='m-2'
-                                        value='online'
-                                        type='radio'
-                                        name='mode'
-                                        checked={mode === "online"}
-                                    />
-                                    Online
-                                </label>
-                            </span>
-                            <span>
-                                <label
-                                    htmlFor='offline'
-                                    className='text-secondary-800'>
-                                    <input
-                                        className='m-2'
-                                        value='offline'
-                                        type='radio'
-                                        name='mode'
-                                        checked={mode === "offline"}
-                                    />
-                                    Offline
-                                </label>
-                            </span>
-                        </div>
+                            <InputBox
+                                className='my-2'
+                                type='text'
+                                name='venue'
+                                value={formData.venue}
+                                placeHolder='Venue'
+                                handleChange={handleChange}
+                            />
 
                         {/* <MultiSelectDropdown
                                 text='Add Department'
@@ -228,30 +207,29 @@ function CreateNewMeet() {
 
                         {/* <Scrollbars style={{ width: "100%", height: 300 }}> */}
 
-                        <div className='w-full h-[300px] overflow-y-scroll pr-2'>
-                            {toggleSelect.map(
-                                ({ id, img, name, role, isSelecte }) =>
-                                    isSelecte && (
-                                        <People
-                                            key={id}
-                                            id={id}
-                                            imgUrl={img}
-                                            name={name}
-                                            role={role}
-                                        />
-                                    )
-                            )}
+                            <div className='w-full h-[300px] overflow-y-scroll pr-2'>
+                                {toggleSelect.map(
+                                    ({ id, img, name, role, isSelecte }) =>
+                                        isSelecte && (
+                                            <People
+                                                key={id}
+                                                id={id}
+                                                imgUrl={img}
+                                                name={name}
+                                                role={role}
+                                            />
+                                        )
+                                )}
+                            </div>
+                            {/* </Scrollbars> */}
                         </div>
-                        {/* </Scrollbars> */}
-                    </div>
-                    <button className='col-start-5 col-span-5 text-primary-900 bg-linkColor z-40 rounded-md mt-6 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine'>
-                        Schedule A New Meet
-                    </button>
-                </form>
-            </section>
-            {/* </div> */}
+                        <button className='col-start-5 col-span-5 text-primary-900 bg-linkColor z-40 rounded-md mt-6 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine'>
+                            Schedule A New Meet
+                        </button>
+                    </form>
+                </section>
+            </div>
         </>
     );
 }
-
 export default CreateNewMeet;

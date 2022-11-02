@@ -72,7 +72,7 @@ function App() {
                             // "To: <mayanksheladiya4448@gmail.com>,<pritmanvar0@gmail.com>\r\n" +
                             "Subject: this would be the subject\r\n" +
                                 "Content-type: text/html\r\n\r\n" +
-                                "<h3>BSDK ab kuch try nahi karunga BC  and this is the last message  to be tested </h3>"
+                                "<h3>it is called unit testing </h3>"
                         )
                             .replace(/\+/g, "-")
                             .replace(/\//g, "_")
