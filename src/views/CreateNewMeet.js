@@ -108,24 +108,37 @@ function CreateNewMeet() {
 
     //handle submit function (final submit function)
     //integrate Backend in this function
-    const [selectedPeople, setSelectedPeople] = useState([]);
-
+    const [finalFormObject, setFinalFormObject] = useState({
+        title: "",
+        venue: "",
+        mode: "offline",
+        date: new Date(),
+        time: new Date(),
+        selectedPeople: [],
+    });
     const handleSubmit = async (e) => {
         console.log(formData, mode);
         e.preventDefault();
-        setSelectedPeople(
-            toggleSelect.filter((person) => {
-                return person.isSelecte;
-            })
-        );
-        axios.post("http://localhost/php_practise/createMeet.php",{
-          ...formData,
-          attendees:selectedPeople
-        }).then(
-            (e)=>{
-                console.log(e.data);
-            }
-        )
+        const selectedPeople = toggleSelect.filter((person) => {
+            return person.isSelecte;
+        });
+        setFinalFormObject({
+            ...formData,
+            mode,
+            selectedPeople,
+        });
+        // setDept([]);
+    };
+
+    function onChangeMode(event) {
+        setMode(event.target.value);
+        console.log(event.target.value);
+    }
+
+    useEffect(() => {
+        console.log("final object", finalFormObject);
+        // send request here.
+
         setFormData({
             title: "",
             venue: "",
@@ -133,14 +146,7 @@ function CreateNewMeet() {
             time: new Date(),
         });
         setMode("offline");
-        // setDept([]);
-        console.log(selectedPeople);
-    };
-
-    function onChangeMode(event) {
-        setMode(event.target.value);
-        console.log(event.target.value);
-    }
+    }, [finalFormObject]);
 
     return (
         <>
