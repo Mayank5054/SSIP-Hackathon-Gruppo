@@ -16,8 +16,8 @@ function CreateNewMeet() {
     const [formData, setFormData] = useState({
         title: "",
         venue: "",
-        date: new Date(),
-        time: new Date(),
+        date: new Date().toISOString(),
+        time: new Date().toISOString(),
     });
 
     //handleChange function for formData
@@ -33,14 +33,14 @@ function CreateNewMeet() {
     function setDateFun(e) {
         setFormData((prevFormData) => ({
             ...prevFormData,
-            date: e,
+            date: e.toISOString(),
         }));
         
     }
     function setTimeFun(e) {
         setFormData((prevFormData) => ({
             ...prevFormData,
-            time: e,
+            time: e.toISOString(),
         }));
         
     }
@@ -60,7 +60,7 @@ function CreateNewMeet() {
 
     //isOpen for popup menu state
     const [isOpen, setIsOpen] = useState(false);
-    const [mode,setMode]=useState("offline");
+    const [mode, setMode] = useState("offline");
     // const [PeopleDataByDept, setPeopleDataByDept] = useState(
     //     filterPeopleData()
     // );
@@ -135,7 +135,7 @@ function CreateNewMeet() {
         setMode(event.target.value);
         console.log(event.target.value);
     }
-var object_url=[];
+    var object_url = [];
     useEffect(() => {
         console.log(finalFormObject)
     //     console.log("final _ object");
@@ -214,27 +214,110 @@ var object_url=[];
     //         time: new Date()
     //     });
     //     setMode("offline");
+        var CLIENT_ID =
+            "934057497734-2k0sp365v94u0u08ta8mv9b4qodkoal6.apps.googleusercontent.com";
+        var API_KEY = "AIzaSyBI57Lt2FHhIiXvRZunhEvuqZhmgZ0lHbk";
+        const DISCOVERY_DOC = [
+            "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+            "https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest",
+        ];
+        const SCOPES =
+            "https://www.googleapis.com/auth/calendar.events " +
+            "https://www.googleapis.com/auth/calendar.readonly " +
+            "https://mail.google.com/";
+        gapi.load("client:auth2", () => {
+            gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOC,
+                scope: SCOPES,
+                plugin_name: "Grouppo",
+            });
+            console.log("final object", finalFormObject);
+            var count = 0;
+            finalFormObject.selectedPeople.forEach((e) => {
+                var url = { displayName: e.name, email: e.email };
+                object_url[count] = url;
+                count++;
+            });
+            console.log("object url = ");
+            console.log(object_url);
+            var data = {
+                summary: "hello world",
+                attendees: object_url /*[
+                {
+                    displayName:"",
+                    email: "mayanksheladiya49@gmail.com",
+                },{email:"mayanksheladiya4448@gmail.com"},
+            ]*/,
+                conferenceData: {
+                    createRequest: {
+                        requestId: "create request By grouppo",
+                        conferenceSolutionKey: { type: "hangoutsMeet" },
+                    },
+                },
+                start: { dateTime: "2022-11-07T09:00:00-07:00" },
+                end: { dateTime: "2022-11-07T17:00:00-07:00" },
+            };
+            var req = gapi.client.calendar.events.insert({
+                calendarId: "primary",
+                resource: data,
+                conferenceDataVersion: 1,
+            });
+            req.execute((e) => {
+                console.log("request sent");
+                console.log(e);
+                // var id = e.id;
+                // gapi.client.calendar.events
+                //     .patch({
+                //         calendarId: "primary",
+                //         eventId: id,
+                //     })
+                //     .execute((e) => {
+                //         console.log("patch = ");
+                //         console.log(e);
+                //     });
+            });
+        });
+        // send request here.
+        axios
+            .post(
+                "http://localhost/php_practise/createMeet.php",
+                finalFormObject
+            )
+            .then((e) => {
+                console.log(e.data);
+            });
+        setFormData({
+            title: "",
+            venue: "",
+            date: new Date().toISOString(),
+            time: new Date().toISOString(),
+            date: new Date().toLocaleDateString(),
+            time: new Date().toLocaleTimeString(),
+        });
+        setMode("offline");
     }, [finalFormObject]);
 
     return (
         <>
             <Nav showBg={true} isLoggedIn={true} />
             <div className="bg-[url('./../public/images/style02.png')] bg-no-repeat bg-right bg-fixed w-full h-screen">
-            <section className='w-9/10 mx-auto relative mt-28'>
-                <Heading text='Create A New Meet' />
-                <form
-                    className='grid grid-cols-12 gap-4 mt-5'
-                    onSubmit={handleSubmit}>
-                    <div className='col-start-2 col-span-5 flex flex-col'>
-                        <InputBox
-                            className='my-2'
-                            type='text'
-                            name='title'
-                            value={formData.title}
-                            placeHolder='Meet Title'
-                            handleChange={handleChange}
-                            required={true}
-                        />
+                <section className='w-9/10 mx-auto relative mt-28'>
+                    <Heading text='Create A New Meet' />
+                    <form
+                        className='grid grid-cols-12 gap-4 mt-5'
+                        onSubmit={handleSubmit}>
+                        <div className='col-start-2 col-span-5 flex flex-col'>
+                            <InputBox
+                                className='my-2'
+                                type='text'
+                                name='title'
+                                value={formData.title}
+                                placeHolder='Meet Title'
+                                handleChange={handleChange}
+                                required={true}
+                            />
 
                             <DatePickerBox
                                 name='date'
@@ -256,30 +339,30 @@ var object_url=[];
                                 handleChange={handleChange}
                             />
 
-                        {/* <MultiSelectDropdown
+                            {/* <MultiSelectDropdown
                                 text='Add Department'
                                 handleChange={handleDeptFunc}
                                 value={dept}
                                 options={["ABc", "XYZ"]}
                             /> */}
-                    </div>
-
-                    <div className='col-start-8 col-span-4 bg-primary-900/50 shadow-mine p-4 rounded'>
-                        <div
-                            className='text-primary-200 text-2xl items-center mb-3 cursor-pointer'
-                            onClick={() => setIsOpen(true)}>
-                            <LibraryAddOutlinedIcon />
-                            Click to invite people
                         </div>
 
-                        <PeoplePopup
-                            open={isOpen}
-                            onClose={() => setIsOpen(false)}
-                            onToggle={handleToggle}
-                            toggleSelectArr={toggleSelect}
-                        />
+                        <div className='col-start-8 col-span-4 bg-primary-900/50 shadow-mine p-4 rounded'>
+                            <div
+                                className='text-primary-200 text-2xl items-center mb-3 cursor-pointer'
+                                onClick={() => setIsOpen(true)}>
+                                <LibraryAddOutlinedIcon />
+                                Click to invite people
+                            </div>
 
-                        {/* <Scrollbars style={{ width: "100%", height: 300 }}> */}
+                            <PeoplePopup
+                                open={isOpen}
+                                onClose={() => setIsOpen(false)}
+                                onToggle={handleToggle}
+                                toggleSelectArr={toggleSelect}
+                            />
+
+                            {/* <Scrollbars style={{ width: "100%", height: 300 }}> */}
 
                             <div className='w-full h-[300px] overflow-y-scroll pr-2'>
                                 {toggleSelect.map(

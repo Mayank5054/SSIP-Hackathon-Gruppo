@@ -14,6 +14,7 @@ import CreateNewMeet from "./views/CreateNewMeet";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import DashBoard from "./views/DashBoard";
+import UpdateDetails from "./views/UpdateDetails";
 import { CommentsDisabledOutlined } from "@mui/icons-material";
 
 function App() {
@@ -70,8 +71,8 @@ function App() {
                         //         //   },
                         raw: btoa(
                             "From:<mayanksheladiya49@gmail.com>\r\n" +
-                            "To: <mayanksheladiya4448@gmail.com>,<pritmanvar0@gmail.com>\r\n" +
-                            "Subject: this would be the subject\r\n" +
+                                "To: <mayanksheladiya4448@gmail.com>,<pritmanvar0@gmail.com>\r\n" +
+                                "Subject: this would be the subject\r\n" +
                                 "Content-type: text/html\r\n\r\n" +
                                 "<h3>it is called unit testing </h3>"
                         )
@@ -80,16 +81,10 @@ function App() {
                             .replace(/=+$/, ""),
                     });
 
-
-
-
-
-
                     //   })
                     //   console.log(atob("RnJvbTogSm9obiBEb2UgPGpkb2VAbWFjaGluZS5leGFtcGxlPiAKVG86IE1hcnkgU21pdGggPG1hcnlAZXhhbXBsZS5uZXQ+IApTdWJqZWN0OiBTYXlpbmcgSGVsbG8gCkRhdGU6IEZyaSwgMjEgTm92IDE5OTcgMDk6NTU6MDYgLTA2MDAgCk1lc3NhZ2UtSUQ6IDwxMjM0QGxvY2FsLm1hY2hpbmUuZXhhbXBsZT4KClRoaXMgaXMgYSBtZXNzYWdlIGp1c3QgdG8gc2F5IGhlbGxvLiBTbywgIkhlbGxvIi4="))
                     // console.log("email = ");
                     // console.log(email);
-
 
                     // email.execute((e) => {
                     //     console.log(e);
@@ -122,65 +117,69 @@ function App() {
                             requestID: "randomString",
                         },
                     };
-                    function createmeet()
-                    {
+                    function createmeet() {
                         var data = {
-                        summary: "hello world",
-                        attendees: [
-                            {
-                                displayName:"",
-                                email: "mayanksheladiya49@gmail.com",
-                            },{email:"mayanksheladiya4448@gmail.com"},
-                        ],
+                            summary: "hello world",
+                            attendees: [
+                                {
+                                    displayName: "",
+                                    email: "mayanksheladiya49@gmail.com",
+                                },
+                                { email: "mayanksheladiya4448@gmail.com" },
+                            ],
 
-                        conferenceData: {
-                            createRequest: {
-                                requestId: "iammayanka",
-                                conferenceSolutionKey: { type: "hangoutsMeet" },
+                            conferenceData: {
+                                createRequest: {
+                                    requestId: "iammayanka",
+                                    conferenceSolutionKey: {
+                                        type: "hangoutsMeet",
+                                    },
+                                },
                             },
-                        },
-                        start: { dateTime: "2022-11-07T09:00:00-07:00" },
-                        end: { dateTime: "2022-11-07T17:00:00-07:00" },
-                    };
-             
-                    var req = gapi.client.calendar.events.insert({
+                            start: { dateTime: "2022-11-07T09:00:00-07:00" },
+                            end: { dateTime: "2022-11-07T17:00:00-07:00" },
+                        };
+
+                        var req = gapi.client.calendar.events.insert({
+                            calendarId: "primary",
+                            resource: data,
+                            conferenceDataVersion: 1,
+                        });
+
+                        req.execute((e) => {
+                            console.log("request sent");
+                            console.log(e);
+                            var id = e.id;
+                            gapi.client.calendar.events
+                                .patch({
+                                    calendarId: "primary",
+                                    eventId: id,
+                                })
+                                .execute((e) => {
+                                    console.log("patch = ");
+                                    console.log(e);
+                                });
+                        });
+                    }
+                    var req02 = gapi.client.calendar.events.list({
                         calendarId: "primary",
-                        resource: data,
-                        conferenceDataVersion: 1,
+                        userId: "me",
                     });
-                    
-                    req.execute((e) => {
-                        console.log("request sent");
-                        console.log(e);
-                        var id = e.id;
-                        gapi.client.calendar.events
-                            .patch({
+
+                    req02.execute((e) => {
+                        console.log("it's req02");
+                        console.log(e.items);
+                        e.items.forEach((r) => {
+                            console.log("xmdkv");
+                            var req03 = gapi.client.calendar.events.get({
                                 calendarId: "primary",
-                                eventId: id,
-                            })
-                            .execute((e) => {
-                                console.log("patch = ");
+                                eventId: r.id,
+                            });
+                            req03.execute((e) => {
                                 console.log(e);
                             });
+                        });
                     });
-                }
-                    var req02=gapi.client.calendar.events.list({
-                        calendarId:"primary",
-                        userId:"me"
-                    })
-                 
-                     req02.execute((e)=>
-                    {console.log("it's req02");console.log(e.items);     
-                    e.items.forEach(
-                        (r)=>{
-                            console.log("xmdkv");
-                     var req03=gapi.client.calendar.events.get({
-                    'calendarId':'primary',
-                    'eventId':r.id
-                          })
-                req03.execute((e)=>{console.log(e);})
-                })               
-                })
                 });
         });
     };
@@ -264,6 +263,9 @@ function App() {
     const navigateToDashBoard = () => {
         navigate("/dashboard");
     };
+    const navigateToUpdateDetails = () => {
+        navigate("/updatedetails");
+    };
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <pathContext.Provider
@@ -277,6 +279,7 @@ function App() {
                     navigateToCalendar: navigateToCalendar,
                     navigateToHistory: navigateToHistory,
                     navigateToDashBoard: navigateToDashBoard,
+                    navigateToUpdateDetails: navigateToUpdateDetails,
                 }}>
                 <Routes>
                     <Route path='/register' element={<RegisterPage />} />
@@ -294,6 +297,7 @@ function App() {
                     />
                     <Route path='/historypage' element={<HistoryPage />} />
                     <Route path='/dashboard' element={<DashBoard />} />
+                    <Route path='/updateDetails' element={<UpdateDetails />} />
                 </Routes>
             </pathContext.Provider>
             <button onClick={handleCal}>click to authorized calendar</button>

@@ -48,7 +48,10 @@ const MeetDetails = () => {
                     </div>
                 </div>
 
-                <h1 className='text-3xl text-secondary-800 mt-8'>Summary</h1>
+                <h1 className='text-3xl text-secondary-800 mt-8'>
+                    {" "}
+                    Subject Of Discussion
+                </h1>
                 <p className='text-secondary-700 w-3/4'>
                     {allMeetings[id].summary}
                 </p>
@@ -59,9 +62,7 @@ const MeetDetails = () => {
                         src='https://img.icons8.com/ios-glyphs/24/C88F8F/pdf.png'
                         alt='PDF'
                     />
-                    <p className='text-secondary-700 pl-2'>
-                        Subject Of Discussion.pdf
-                    </p>
+                    <p className='text-secondary-700 pl-2'>Summary.pdf</p>
                 </div>
                 <div className='flex item-center column my-2'>
                     <img
