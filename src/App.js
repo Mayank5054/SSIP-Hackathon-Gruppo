@@ -14,6 +14,7 @@ import CreateNewMeet from "./views/CreateNewMeet";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import DashBoard from "./views/DashBoard";
+import { CommentsDisabledOutlined } from "@mui/icons-material";
 
 function App() {
     var gapi = window.gapi;
@@ -68,8 +69,8 @@ function App() {
                         //         //       ],
                         //         //   },
                         raw: btoa(
-                            // "From:<mayanksheladiya49@gmail.com>\r\n" +
-                            // "To: <mayanksheladiya4448@gmail.com>,<pritmanvar0@gmail.com>\r\n" +
+                            "From:<mayanksheladiya49@gmail.com>\r\n" +
+                            "To: <mayanksheladiya4448@gmail.com>,<pritmanvar0@gmail.com>\r\n" +
                             "Subject: this would be the subject\r\n" +
                                 "Content-type: text/html\r\n\r\n" +
                                 "<h3>it is called unit testing </h3>"
@@ -78,16 +79,25 @@ function App() {
                             .replace(/\//g, "_")
                             .replace(/=+$/, ""),
                     });
+
+
+
+
+
+
                     //   })
                     //   console.log(atob("RnJvbTogSm9obiBEb2UgPGpkb2VAbWFjaGluZS5leGFtcGxlPiAKVG86IE1hcnkgU21pdGggPG1hcnlAZXhhbXBsZS5uZXQ+IApTdWJqZWN0OiBTYXlpbmcgSGVsbG8gCkRhdGU6IEZyaSwgMjEgTm92IDE5OTcgMDk6NTU6MDYgLTA2MDAgCk1lc3NhZ2UtSUQ6IDwxMjM0QGxvY2FsLm1hY2hpbmUuZXhhbXBsZT4KClRoaXMgaXMgYSBtZXNzYWdlIGp1c3QgdG8gc2F5IGhlbGxvLiBTbywgIkhlbGxvIi4="))
-                    console.log("email = ");
-                    console.log(email);
-                    email.execute((e) => {
-                        console.log(e);
-                    });
-                    data_email.execute((e) => {
-                        console.log(e);
-                    });
+                    // console.log("email = ");
+                    // console.log(email);
+
+
+                    // email.execute((e) => {
+                    //     console.log(e);
+                    // });
+
+                    // data_email.execute((e) => {
+                    //     console.log(e);
+                    // });
                     // console.log("logged in");console.log(e);
                     console.log("data_email =");
                     console.log(data_email);
@@ -112,12 +122,15 @@ function App() {
                             requestID: "randomString",
                         },
                     };
-                    var data = {
+                    function createmeet()
+                    {
+                        var data = {
                         summary: "hello world",
                         attendees: [
                             {
+                                displayName:"",
                                 email: "mayanksheladiya49@gmail.com",
-                            } /*,{"email":"mayanksheladiya4448@gmail.com"}*/,
+                            },{email:"mayanksheladiya4448@gmail.com"},
                         ],
 
                         conferenceData: {
@@ -129,13 +142,13 @@ function App() {
                         start: { dateTime: "2022-11-07T09:00:00-07:00" },
                         end: { dateTime: "2022-11-07T17:00:00-07:00" },
                     };
-
+             
                     var req = gapi.client.calendar.events.insert({
                         calendarId: "primary",
                         resource: data,
                         conferenceDataVersion: 1,
                     });
-
+                    
                     req.execute((e) => {
                         console.log("request sent");
                         console.log(e);
@@ -150,6 +163,24 @@ function App() {
                                 console.log(e);
                             });
                     });
+                }
+                    var req02=gapi.client.calendar.events.list({
+                        calendarId:"primary",
+                        userId:"me"
+                    })
+                 
+                     req02.execute((e)=>
+                    {console.log("it's req02");console.log(e.items);     
+                    e.items.forEach(
+                        (r)=>{
+                            console.log("xmdkv");
+                     var req03=gapi.client.calendar.events.get({
+                    'calendarId':'primary',
+                    'eventId':r.id
+                          })
+                req03.execute((e)=>{console.log(e);})
+                })               
+                })
                 });
         });
     };
@@ -265,7 +296,7 @@ function App() {
                     <Route path='/dashboard' element={<DashBoard />} />
                 </Routes>
             </pathContext.Provider>
-            {/* <button onClick={handleCal}>click to authorized calendar</button> */}
+            <button onClick={handleCal}>click to authorized calendar</button>
         </LocalizationProvider>
     );
 }
