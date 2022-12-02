@@ -4,41 +4,47 @@
         "img": "https://cdn4.vectorstock.com/i/1000x1000/98/38/girl-user-avatars-on-a-white-background-vector-31979838.jpg",
         "name": "Dhara Solanki",
         "role": "ABC akdhfo",
-        "department": "ABc"
+        "department": "ABc",
+        "email":""
     },
     {
         "id": "2",
         "img": "https://thumbs.dreamstime.com/b/female-user-avatar-profile-picture-icon-isolated-vector-illustration-flat-design-people-character-white-background-woman-146472409.jpg",
         "name": "Drishty Ganatra",
         "role": "ABC akdhfo",
-        "department": "ABc"
+        "department": "ABc",
+        "email":""
     },
     {
         "id": "3",
         "img": "https://cdn3.vectorstock.com/i/1000x1000/31/77/beautiful-latin-woman-avatar-character-icon-vector-33983177.jpg",
         "name": "Gneya Pandya",
         "role": "XYZ akdhfo",
-        "department": "XYZ"
+        "department": "XYZ",
+        "email":""
     },
     {
         "id": "4",
         "img": "https://cdn4.vectorstock.com/i/1000x1000/98/38/girl-user-avatars-on-a-white-background-vector-31979838.jpg",
         "name": "Krupa Bhavsar",
         "role": "ABC akdhfo",
-        "department": "ABc"
+        "department": "ABc",
+        "email":""
     },
     {
         "id": "5",
         "img": "https://thumbs.dreamstime.com/b/female-user-avatar-profile-picture-icon-isolated-vector-illustration-flat-design-people-character-white-background-woman-146472409.jpg",
         "name": "Hiral Bhanushali",
         "role": "XYZ akdhfo",
-        "department": "XYZ"
+        "department": "XYZ",
+        "email":""
     },
     {
         "id": "6",
         "img": "https://cdn3.vectorstock.com/i/1000x1000/31/77/beautiful-latin-woman-avatar-character-icon-vector-33983177.jpg",
         "name": "ABC XYZ",
         "role": "XYZ akdhfo",
-        "department": "XYZ"
+        "department": "XYZ",
+        "email":"pritmanvar0@gmail.com"
     }
 ]
