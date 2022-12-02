@@ -7,6 +7,7 @@ const Popup_STYLES = {
     top: "50%",
     left: "50%",
     width: "500px",
+    height: "90%",
     transform: "translate(-50%, -50%)",
     backgroundColor: "#FFF",
     padding: "1%",

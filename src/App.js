@@ -14,6 +14,7 @@ import CreateNewMeet from "./views/CreateNewMeet";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import DashBoard from "./views/DashBoard";
+import UpdateDetails from "./views/UpdateDetails";
 
 function App() {
     var gapi = window.gapi;
@@ -233,6 +234,9 @@ function App() {
     const navigateToDashBoard = () => {
         navigate("/dashboard");
     };
+    const navigateToUpdateDetails = () => {
+        navigate("/updatedetails");
+    };
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <pathContext.Provider
@@ -246,6 +250,7 @@ function App() {
                     navigateToCalendar: navigateToCalendar,
                     navigateToHistory: navigateToHistory,
                     navigateToDashBoard: navigateToDashBoard,
+                    navigateToUpdateDetails: navigateToUpdateDetails,
                 }}>
                 <Routes>
                     <Route path='/register' element={<RegisterPage />} />
@@ -263,6 +268,7 @@ function App() {
                     />
                     <Route path='/historypage' element={<HistoryPage />} />
                     <Route path='/dashboard' element={<DashBoard />} />
+                    <Route path='/updateDetails' element={<UpdateDetails />} />
                 </Routes>
             </pathContext.Provider>
             {/* <button onClick={handleCal}>click to authorized calendar</button> */}

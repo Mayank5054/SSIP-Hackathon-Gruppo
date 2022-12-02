@@ -8,17 +8,24 @@ import DatePickerBox from "../components/DatePickerBox";
 import TimePickerBox from "../components/TimePickerBox";
 import LibraryAddOutlinedIcon from "@mui/icons-material/LibraryAddOutlined";
 import PeoplePopup from "./../components/PeoplePopup";
-import MultiSelectDropdown from "../components/MultiSelectDropdown";
-import axios from "axios";
-function CreateNewMeet() {
+import { Label } from "@mui/icons-material";
+
+const UpdateDetails = ({ meetId }) => {
     //in DB extract date as time.toLocaleDateString() (because while selecting date it will select current time by default)
     //in DB extract time as time.toLocaleTimeString() (because while selecting time it will select current date by default)
+
+    // Fetch meet data for specific meetId and set initial data to that
     const [formData, setFormData] = useState({
         title: "",
         venue: "",
-        date: new Date().toISOString(),
-        time: new Date().toISOString(),
+        date: new Date(),
+        time: new Date(),
     });
+    //isOpen for popup menu state
+    const [isOpen, setIsOpen] = useState(false);
+    const [mode, setMode] = useState("offline");
+    //for selecte or unselecte people
+    const [toggleSelect, setToggleSelect] = useState(newToggleSelectData());
 
     //handleChange function for formData
     function handleChange(event) {
@@ -33,42 +40,16 @@ function CreateNewMeet() {
     function setDateFun(e) {
         setFormData((prevFormData) => ({
             ...prevFormData,
-            date: e.toISOString(),
+            date: e,
         }));
     }
     function setTimeFun(e) {
         setFormData((prevFormData) => ({
             ...prevFormData,
-            time: e.toISOString(),
+            time: e,
         }));
     }
 
-    // const [dept, setDept] = useState([]);
-
-    //handle change function for dept
-    // const handleDeptFunc = (event) => {
-    //     const {
-    //         target: { value },
-    //     } = event;
-    //     setDept(
-    //         // On autofill we get a stringified value.
-    //         typeof value === "string" ? value.split(",") : value
-    //     );
-    // };
-
-    //isOpen for popup menu state
-    const [isOpen, setIsOpen] = useState(false);
-    const [mode, setMode] = useState("offline");
-    // const [PeopleDataByDept, setPeopleDataByDept] = useState(
-    //     filterPeopleData()
-    // );
-    //function to filter people (select people by selected department name)
-    // function filterPeopleData() {
-    //     return PeopleData.filter((people) => dept.includes(people.department));
-    // }
-
-    //for selecte or unselecte people
-    const [toggleSelect, setToggleSelect] = useState(newToggleSelectData());
     //addind isSelecte for every object of people filtered by department name
     function newToggleSelectData() {
         const data = [];
@@ -96,24 +77,14 @@ function CreateNewMeet() {
         console.log("Toggle button clicked");
     }
 
-    //when dept arr change
-    // useEffect(() => {
-    //     setPeopleDataByDept(filterPeopleData());
-    // }, [dept]);
-
-    //when PeopleDataByDept arr change
-    // useEffect(() => {
-    //     setToggleSelect(newToggleSelectData());
-    // }, [PeopleDataByDept]);
-
     //handle submit function (final submit function)
     //integrate Backend in this function
     const [finalFormObject, setFinalFormObject] = useState({
         title: "",
         venue: "",
         mode: "offline",
-        date: new Date().toISOString(),
-        time: new Date().toISOString(),
+        date: new Date(),
+        time: new Date(),
         selectedPeople: [],
     });
     const handleSubmit = async (e) => {
@@ -127,13 +98,9 @@ function CreateNewMeet() {
             mode,
             selectedPeople,
         });
-        // setDept([]);
-    };
 
-    function onChangeMode(event) {
-        setMode(event.target.value);
-        console.log(event.target.value);
-    }
+        console.log(finalFormObject);
+    };
 
     useEffect(() => {
         console.log("final object", finalFormObject);
@@ -142,8 +109,8 @@ function CreateNewMeet() {
         setFormData({
             title: "",
             venue: "",
-            date: new Date().toISOString(),
-            time: new Date().toISOString(),
+            date: new Date(),
+            time: new Date(),
         });
         setMode("offline");
     }, [finalFormObject]);
@@ -165,9 +132,7 @@ function CreateNewMeet() {
                                 value={formData.title}
                                 placeHolder='Meet Title'
                                 handleChange={handleChange}
-                                required={true}
                             />
-
                             <DatePickerBox
                                 name='date'
                                 value={formData.date}
@@ -178,7 +143,6 @@ function CreateNewMeet() {
                                 value={formData.time}
                                 handleChange={setTimeFun}
                             />
-
                             <InputBox
                                 className='my-2'
                                 type='text'
@@ -187,16 +151,30 @@ function CreateNewMeet() {
                                 placeHolder='Venue'
                                 handleChange={handleChange}
                             />
-
-                            {/* <MultiSelectDropdown
-                                text='Add Department'
-                                handleChange={handleDeptFunc}
-                                value={dept}
-                                options={["ABc", "XYZ"]}
-                            /> */}
+                            <div className='flex justify-between my-2'>
+                                <label className='text-xl text-secondary-700'>
+                                    Agenda
+                                </label>
+                                <input type='file' name='agenda' id='agenda' />
+                            </div>
+                            <div className='flex justify-between my-2'>
+                                <label className='text-xl text-secondary-700'>
+                                    Meet Summary
+                                </label>
+                                <input
+                                    type='file'
+                                    name='summary'
+                                    id='summary'
+                                />
+                            </div>
+                            <div className='flex justify-between my-2'>
+                                <label className='text-xl text-secondary-700'>
+                                    Report
+                                </label>
+                                <input type='file' name='report' id='report' />
+                            </div>
                         </div>
-
-                        <div className='col-start-8 col-span-4 bg-primary-900/50 shadow-mine p-4 rounded'>
+                        <div className='col-start-8 col-span-4 h-[370px] bg-primary-900/50 shadow-mine p-4 rounded'>
                             <div
                                 className='text-primary-200 text-2xl items-center mb-3 cursor-pointer'
                                 onClick={() => setIsOpen(true)}>
@@ -229,13 +207,15 @@ function CreateNewMeet() {
                             </div>
                             {/* </Scrollbars> */}
                         </div>
+
                         <button className='col-start-5 col-span-5 text-primary-900 bg-linkColor z-40 rounded-md mt-6 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine'>
-                            Schedule A New Meet
+                            Update
                         </button>
                     </form>
                 </section>
             </div>
         </>
     );
-}
-export default CreateNewMeet;
+};
+
+export default UpdateDetails;
