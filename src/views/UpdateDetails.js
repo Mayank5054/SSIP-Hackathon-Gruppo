@@ -102,15 +102,93 @@ const UpdateDetails = ({ meetId }) => {
         console.log(finalFormObject);
     };
 
+    var object_url = [];
     useEffect(() => {
-        console.log("final object", finalFormObject);
+        console.log("finalFormObject = ");
+        console.log(finalFormObject.date.split("T")[0]);
+        console.log(finalFormObject.time.split("T")[1]);
+    
+        var CLIENT_ID =
+            "934057497734-2k0sp365v94u0u08ta8mv9b4qodkoal6.apps.googleusercontent.com";
+        var API_KEY = "AIzaSyBI57Lt2FHhIiXvRZunhEvuqZhmgZ0lHbk";
+        const DISCOVERY_DOC = [
+            "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+            "https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest",
+        ];
+        const SCOPES =
+            "https://www.googleapis.com/auth/calendar.events " +
+            "https://www.googleapis.com/auth/calendar.readonly " +
+            "https://mail.google.com/";
+        gapi.load("client:auth2", () => {
+            gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOC,
+                scope: SCOPES,
+                plugin_name: "Grouppo",
+            });
+            console.log("final object", finalFormObject);
+            var count = 0;
+            finalFormObject.selectedPeople.forEach((e) => {
+                var url = { displayName: e.name, email: e.email };
+                object_url[count] = url;
+                count++;
+            });
+            console.log("object url = ");
+            console.log(object_url);
+            var data = {
+                summary: "hello world",
+                attendees: object_url /*[
+                {
+                    displayName:"",
+                    email: "mayanksheladiya49@gmail.com",
+                },{email:"mayanksheladiya4448@gmail.com"},
+            ]*/,
+                conferenceData: {
+                    createRequest: {
+                        requestId: "create request By grouppo",
+                        conferenceSolutionKey: { type: "hangoutsMeet" },
+                    },
+                },
+                start: { dateTime:finalFormObject.date.split("T")[0]+"T"+finalFormObject.time.split("T")[1] },
+                end: { dateTime: finalFormObject.date.split("T")[0]+"T"+finalFormObject.time.split("T")[1] },
+            };
+            var req = gapi.client.calendar.events.insert({
+                calendarId: "primary",
+                resource: data,
+                conferenceDataVersion: 1,
+            });
+            req.execute((e) => {
+                console.log("request sent");
+                console.log(e);
+                // var id = e.id;
+                // gapi.client.calendar.events
+                //     .patch({
+                //         calendarId: "primary",
+                //         eventId: id,
+                //     })
+                //     .execute((e) => {
+                //         console.log("patch = ");
+                //         console.log(e);
+                //     });
+            });
+        });
         // send request here.
-
+        axios
+            .post(
+                "http://localhost/php_practise/createMeet.php",
+                finalFormObject
+            )
+            .then((e) => {
+                console.log(e.data);
+            });
         setFormData({
             title: "",
             venue: "",
-            date: new Date(),
-            time: new Date(),
+            date: new Date().toISOString(),
+            time: new Date().toISOString(),
+            date: new Date().toLocaleDateString(),
+            time: new Date().toLocaleTimeString(),
         });
         setMode("offline");
     }, [finalFormObject]);
@@ -123,7 +201,8 @@ const UpdateDetails = ({ meetId }) => {
                     <Heading text='Create A New Meet' />
                     <form
                         className='grid grid-cols-12 gap-4 mt-5'
-                        onSubmit={handleSubmit}>
+                        onSubmit={handleSubmit}
+                        enctype="multipart/form-data">
                         <div className='col-start-2 col-span-5 flex flex-col'>
                             <InputBox
                                 className='my-2'
@@ -155,7 +234,7 @@ const UpdateDetails = ({ meetId }) => {
                                 <label className='text-xl text-secondary-700'>
                                     Agenda
                                 </label>
-                                <input type='file' name='agenda' id='agenda' />
+                                <input type='file' name='agenda' id='agenda' accept="application/pdf"/>
                             </div>
                             <div className='flex justify-between my-2'>
                                 <label className='text-xl text-secondary-700'>
@@ -165,13 +244,14 @@ const UpdateDetails = ({ meetId }) => {
                                     type='file'
                                     name='summary'
                                     id='summary'
+                                    accept="application/pdf"
                                 />
                             </div>
                             <div className='flex justify-between my-2'>
                                 <label className='text-xl text-secondary-700'>
                                     Report
                                 </label>
-                                <input type='file' name='report' id='report' />
+                                <input type='file' name='report' id='report' accept="application/pdf"/>
                             </div>
                         </div>
                         <div className='col-start-8 col-span-4 h-[370px] bg-primary-900/50 shadow-mine p-4 rounded'>
