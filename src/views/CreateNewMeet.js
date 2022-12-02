@@ -35,14 +35,12 @@ function CreateNewMeet() {
             ...prevFormData,
             date: e.toISOString(),
         }));
-        
     }
     function setTimeFun(e) {
         setFormData((prevFormData) => ({
             ...prevFormData,
             time: e.toISOString(),
         }));
-        
     }
 
     // const [dept, setDept] = useState([]);
@@ -141,6 +139,83 @@ function CreateNewMeet() {
         console.log(finalFormObject.date.split("T")[0]);
         console.log(finalFormObject.time.split("T")[1]);
     
+        console.log(finalFormObject);
+        //     console.log("final _ object");
+        //     console.log(finalFormObject);
+        //     var CLIENT_ID =
+        //     "934057497734-2k0sp365v94u0u08ta8mv9b4qodkoal6.apps.googleusercontent.com";
+        // var API_KEY = "AIzaSyBI57Lt2FHhIiXvRZunhEvuqZhmgZ0lHbk";
+        // const DISCOVERY_DOC = [
+        //     "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+        //     "https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest",
+        // ];
+        // const SCOPES =
+        //     "https://www.googleapis.com/auth/calendar.events " +
+        //     "https://www.googleapis.com/auth/calendar.readonly " +
+        //     "https://mail.google.com/";
+        //     gapi.load("client:auth2", () => {
+        //         gapi.client.init({
+        //             apiKey: API_KEY,
+        //             clientId: CLIENT_ID,
+        //             discoveryDocs: DISCOVERY_DOC,
+        //             scope: SCOPES,
+        //             plugin_name: "Grouppo",
+        //         });
+        //     console.log("final object", finalFormObject);
+        //     var count=0;
+        //     finalFormObject.selectedPeople.forEach(e => {
+        //         var url={displayName:e.name,email:e.email}
+        //         object_url[count]=url;
+        //         count++;
+        //     });
+        //     console.log("object url = ");
+        //   console.log(object_url);
+        //     var data = {
+        //         summary: "hello world",
+        //         attendees: object_url/*[
+        //             {
+        //                 displayName:"",
+        //                 email: "mayanksheladiya49@gmail.com",
+        //             },{email:"mayanksheladiya4448@gmail.com"},
+        //         ]*/,
+        //         conferenceData: {
+        //             createRequest: {
+        //                 requestId: "create request By grouppo",
+        //                 conferenceSolutionKey: { type: "hangoutsMeet" },
+        //             },
+        //         },
+        //         start: { dateTime: finalFormObject.date + "T"+ finalFormObject.time },
+        //         end: { dateTime: finalFormObject.date + "T"+ finalFormObject.time },
+        //     };
+        //     var req = gapi.client.calendar.events.insert({
+        //         calendarId: "primary",
+        //         resource: data,
+        //         conferenceDataVersion: 1,
+        //     });
+        //     req.execute((e) => {
+        //         console.log("request sent from createNewMeet");
+        //         console.log(e);
+        //         // var id = e.id;
+        //         // gapi.client.calendar.events
+        //         //     .patch({
+        //         //         calendarId: "primary",
+        //         //         eventId: id,
+        //         //     })
+        //         //     .execute((e) => {
+        //         //         console.log("patch = ");
+        //         //         console.log(e);
+        //         //     });
+        //     });
+        // });
+        //     // send request here.
+        //      axios.post("http://localhost/php_practise/createMeet.php",finalFormObject).then((e)=>{console.log(e.data);})
+        //     setFormData({
+        //         title: "",
+        //         venue: "",
+        //         date: new Date(),
+        //         time: new Date()
+        //     });
+        //     setMode("offline");
         var CLIENT_ID =
             "934057497734-2k0sp365v94u0u08ta8mv9b4qodkoal6.apps.googleusercontent.com";
         var API_KEY = "AIzaSyBI57Lt2FHhIiXvRZunhEvuqZhmgZ0lHbk";
@@ -266,6 +341,29 @@ function CreateNewMeet() {
                                 handleChange={handleChange}
                             />
 
+                            <div className='flex justify-between my-2'>
+                                <label className='text-xl text-secondary-700'>
+                                    Agenda
+                                </label>
+                                <input type='file' name='agenda' id='agenda' />
+                            </div>
+                            <div className='flex justify-between my-2'>
+                                <label className='text-xl text-secondary-700'>
+                                    Meet Summary
+                                </label>
+                                <input
+                                    type='file'
+                                    name='summary'
+                                    id='summary'
+                                />
+                            </div>
+                            <div className='flex justify-between my-2'>
+                                <label className='text-xl text-secondary-700'>
+                                    Report
+                                </label>
+                                <input type='file' name='report' id='report' />
+                            </div>
+
                             {/* <MultiSelectDropdown
                                 text='Add Department'
                                 handleChange={handleDeptFunc}
@@ -274,7 +372,7 @@ function CreateNewMeet() {
                             /> */}
                         </div>
 
-                        <div className='col-start-8 col-span-4 bg-primary-900/50 shadow-mine p-4 rounded'>
+                        <div className='col-start-8 col-span-4 h-[360px] bg-primary-900/50 shadow-mine p-4 rounded'>
                             <div
                                 className='text-primary-200 text-2xl items-center mb-3 cursor-pointer'
                                 onClick={() => setIsOpen(true)}>
