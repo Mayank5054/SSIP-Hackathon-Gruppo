@@ -6,7 +6,7 @@ function InputBox(props) {
             name={props.name}
             required={props.required}
             autoComplete={props.autoComplete}
-            className={`w-full rounded p-4 text-primary-900 font-medium outline-primary-900 ${props.className}`}
+            className={`w-full rounded p-2 text-primary-900 font-medium outline-primary-900 ${props.className}`}
             type={props.type}
             value={props.value}
             placeholder={props.placeHolder}
