@@ -24,7 +24,6 @@ $ans=$ab->existence($email,$password);
 echo $ans;
 }
 else{
-      echo "login credentials invalid";
-    
+      echo "LOGIN_CREDENTIAL_INVALID"; 
 }
 ?>

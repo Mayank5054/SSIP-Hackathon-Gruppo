@@ -20,16 +20,18 @@ class validation{
            if($db)
            {
             //    $co=$db->query("select * from signup where email='" . $em . "' and password='" .$pw . "'");
-           
+            // and user_password='".$pw."'
               
-              $check_exist=$db->query("select * from signup where email='".$em."' and user_password='".$pw."'");
+              $check_exist=$db->query("select * from signup where email='".$em."'");
+            echo $check_exist;
               $object_of_exist=$check_exist->fetch_assoc();
                if($object_of_exist==null){
                 return "USER_NOT_EXISTS";
                }
                else{
-                $db->query("use grouppo");
-                $co=$db->query("CALL tableID('" . $em . "','" . $pw . "')");
+                $db->query("use grouppo;");
+                $db->query("source D:/ssip/ssip_script01.sql");
+                $co=$db->query("CALL tableID('" . $em . "','" . $pw . "');");
                 $fetch=$co->fetch_all(1);    
                 $data=json_encode($fetch);
                 return $data;

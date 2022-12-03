@@ -27,8 +27,7 @@ if ($password == $conf_pass) {
             {
                 $userID=$obj->generate_UID($name);
                 $db->query("use grouppo");
-                $db->query("source D:/ssip/ssip_script01.sql");
-                $co=$db->query("CALL createAccount('" . $email . "','" . $password . "','" . $userID ."')");
+                $co=$db->query("CALL createAccount('" . $email . "','" . $password . "','" . $userID ."','".$name."')");
                 echo "USER_ACCOUNT_CREATED";
                 echo $userID;
                 $db->close();

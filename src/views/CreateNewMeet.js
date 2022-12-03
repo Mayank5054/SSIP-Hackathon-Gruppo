@@ -345,7 +345,7 @@ function CreateNewMeet() {
                                 <label className='text-xl text-secondary-700'>
                                     Agenda
                                 </label>
-                                <input type='file' name='agenda' id='agenda' />
+                                <input type='file' name='agenda' id='agenda' accept="application/pdf"/>
                             </div>
                             <div className='flex justify-between my-2'>
                                 <label className='text-xl text-secondary-700'>
@@ -355,13 +355,14 @@ function CreateNewMeet() {
                                     type='file'
                                     name='summary'
                                     id='summary'
+                                    accept="application/pdf"
                                 />
                             </div>
                             <div className='flex justify-between my-2'>
                                 <label className='text-xl text-secondary-700'>
                                     Report
                                 </label>
-                                <input type='file' name='report' id='report' />
+                                <input type='file' name='report' id='report' accept="application/pdf"/>
                             </div>
 
                             {/* <MultiSelectDropdown
