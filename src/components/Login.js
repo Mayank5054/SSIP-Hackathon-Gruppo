@@ -57,12 +57,20 @@ const Login = (props) => {
                             setShowState(true);
                             setState("Invalid Credentials");
                             break;
+                        case "EXTERNAL_DATABASE_ERROR":
+                            setShowState(true);
+                            setState("Some error occured in DataBase");
+                            break;
                         case "USER_NOT_EXISTS":
                             setShowState(true);
                             setState("User not exists");
                             ctx.navigateToRegister();
                             break;
                         default:
+                            localStorage.setItem(
+                                "table_id",
+                                ed.data[0]["title"]
+                            );
                             setSuccess(true);
                             break;
                     }
@@ -118,7 +126,7 @@ const Login = (props) => {
                             className='shadow-mine'
                         />
 
-                        <button className='bg-linkColor z-40 rounded-md mt-2 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine'>
+                        <button className='bg-linkColor z-40 rounded-md mt-2 p-1 w-full text-2xl font-medium border-2 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine'>
                             LOGIN
                         </button>
                     </form>

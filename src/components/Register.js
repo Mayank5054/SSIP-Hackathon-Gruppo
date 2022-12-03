@@ -121,7 +121,7 @@ const Register = (props) => {
                         className='flex flex-col gap-5 text-primary-900 font-medium items-center w-1/2 '>
                         <DropDownMenu
                             name='role'
-                            className='w-full rounded p-4 text-primary-900 font-medium outline-primary-900 shadow-mine'
+                            className='w-full rounded p-2 text-primary-900 font-medium outline-primary-900 shadow-mine'
                             value={formData.role}
                             text='Choose Your Role'
                             handleChange={handleChange}
@@ -166,7 +166,7 @@ const Register = (props) => {
                             handleChange={handleChange}
                             className='shadow-mine'
                         />
-                        <button className='bg-linkColor z-40 rounded-md mt-2 p-1 w-full text-4xl font-medium border-4 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine'>
+                        <button className='bg-linkColor z-40 rounded-md mt-2 p-1 w-full text-2xl font-medium border-2 hover:bg-primary-900 border-linkColor hover:text-linkColor shadow-mine'>
                             REGISTER
                         </button>
                     </form>

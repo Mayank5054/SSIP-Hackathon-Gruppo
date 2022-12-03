@@ -300,7 +300,7 @@ function App() {
                     <Route path='/updateDetails' element={<UpdateDetails />} />
                 </Routes>
             </pathContext.Provider>
-            <button onClick={handleCal}>click to authorized calendar</button>
+            {/* <button onClick={handleCal}>click to authorized calendar</button> */}
         </LocalizationProvider>
     );
 }
