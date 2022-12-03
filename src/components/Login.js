@@ -4,6 +4,7 @@ import MyLink from "./MyLink";
 import DropDownMenu from "./DropDownMenu";
 import pathContext from "../context/path-context";
 import InputBox from "./InputBox";
+import LoginState from "../components/LoginState";
 
 const Login = (props) => {
     localStorage.setItem("check_obj", "false");
@@ -32,6 +33,8 @@ const Login = (props) => {
         }));
     }
 
+    const [showState, setShowState] = useState(false);
+    const [state, setState] = useState("");
     const HandleSubmit = async (e) => {
         e.preventDefault();
         // handle01.php is run on localhost for our development after we post it on somewhere which can execute php
@@ -48,6 +51,21 @@ const Login = (props) => {
                     console.log("data posted succesfully");
                     setSuccess(true);
                     console.log(ed.data);
+
+                    switch (ed.data) {
+                        case "LOGIN_CREDENTIALS_INVALID":
+                            setShowState(true);
+                            setState("Invalid Credentials");
+                            break;
+                        case "USER_NOT_EXISTS":
+                            setShowState(true);
+                            setState("User not exists");
+                            ctx.navigateToRegister();
+                            break;
+                        default:
+                            setSuccess(true);
+                            break;
+                    }
                 }
                 // access key word in ed.data
                 // if validation incorrect e.data returns string "LOGIN_CREDENTIALS_INVALID"
@@ -64,6 +82,7 @@ const Login = (props) => {
 
     return (
         <div className="bg-[url('./../public/images/style01.png')] bg-fixed w-full flex justify-center bg-no-repeat bg-center h-screen">
+            {showState && <LoginState text={state} />}
             {success ? (
                 <section className='flex justify-center flex-col'>
                     <h1 className='text-white text-3xl font-medium'>
@@ -78,14 +97,6 @@ const Login = (props) => {
                     <form
                         onSubmit={HandleSubmit}
                         className='flex flex-col gap-5 text-primary-900 font-medium items-center w-1/2 '>
-                        <DropDownMenu
-                            className='w-full rounded p-4 text-primary-900 font-medium outline-primary-900 shadow-mine'
-                            name='role'
-                            value={formData.role}
-                            text='Choose Your Role'
-                            handleChange={handleChange}
-                        />
-
                         <InputBox
                             type='email'
                             name='email'
